@@ -50,7 +50,7 @@ const ref = createRef<TreeMenuActions>();
 
 <TreeMenu
   ref={ref}
-  tems={ITEMS}
+  items={ITEMS}
   onClick={onClick} 
 />
 
