@@ -61,7 +61,7 @@ const ref = createRef<TreeMenuActions>();
 | Propery name | Description                    | Signature
 | ------------- | ------------------------------ | ---- |
 | `items[]`      | tree menu items array       | `TreeMenuItem`[] |
-| `re`      | handle to TreeMenu methods       | `TreeMenuActions` |
+| `ref`      | handle to TreeMenu methods       | `TreeMenuActions` |
 | `onClick`   |  item click handler     | onClick?:(item:TreeMenuItem) => void|
 | `onToggle`   |  collapse  / expand     | onToggle?:(id?:string,collapsed?:boolean) => void;|
 | `initialCollapsed`   |  initial tree state     | boolean |
