@@ -37,8 +37,14 @@ export type ItemRenderProps = {
     renderGroup?:TreeMenuProps["renderGroupIcon"];
 } & ItemProps;
 
+type Theme = "dark" | "light"
+
 export interface TreeMenuProps {
+    // item tree data
     items:TreeMenuItem[];
+    // style scope
+    theme?:Theme;
+    classPrefix?:string;
     initialCollapsed?:boolean;
     initialSelected?:string;    
     renderBadge?:RenderType;

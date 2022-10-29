@@ -1,11 +1,12 @@
 // Generated with util/create-component.js
 import React,{ useEffect,createRef } from "react";
 import TreeMenu,{ TreeMenuItem,TreeMenuActions } from "./TreeMenu";
+// import * as DarkModeToggle from "https://googlechromelabs.github.io/dark-mode-toggle/src/dark-mode-toggle.mjs";
 
 
 const ITEMS : TreeMenuItem[] = [
 	{ 
-		id:"main",title:"Main Menu",
+		id:"main",title:"Main Menu 1",
 		childs:[
 			{
 				id:"home",
@@ -143,6 +144,7 @@ export const WithBar = ()  => {
 	return (
 		<div style={{ maxWidth:400 }}>
 			<TreeMenu 
+				// classPrefix="light"
 				// initialCollapsed
 				initialSelected="LAST"
 				ref={ref}

@@ -2,10 +2,12 @@
 @import "../variables.less";
 @import "../typography.less";
 
-
-
 .tree-menu {
-    
+  
+  background-color: var(--tree-background);
+  
+  font-family: var(--font-family);
+
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */
    -khtml-user-select: none; /* Konqueror HTML */
@@ -32,14 +34,16 @@
       cursor: pointer;
       transition: all .3s ease-in;
 
+      color:var(--item-title);
+
       &.disabled {
           pointer-events: none;
-          color: rgb(110, 110, 110);
+          color: var(--item-disabled-color); //rgb(110, 110, 110);
       }
 
       &:hover {
-          color: rgb(62, 174, 230);
-          background-color: rgb(60, 63, 76);
+          color: var(--item-hover-color);
+          background-color: var(--item-hover-background);
           transition: all .3s ease-in;
           opacity: 1;
       }
@@ -58,7 +62,7 @@
 
           &.disabled {
               pointer-events: none;
-              color: rgb(110, 110, 110);
+              color: var(--item-disabled-color);
           }
 
       }
@@ -87,6 +91,10 @@
           flex-direction: row;
           align-items: center;
 
+          &:hover{
+            color:var(--item-hover-color);
+          }
+
           > .folder {
 
           }
@@ -97,15 +105,20 @@
               // border:1px solid white;
           }
           > .title {
+
+              // &:not(:hover) and :not(.disabled) {
+               // color: var(--item-title);
+              // }
               display: flex;
               flex-grow: 1;
               flex-direction: column;
-
               > .info {
                   font-size: .7em;
-                  color: orange;
+                  color: var(--item-info);
               }
           }
+
+      
           
           > .marker {
 
@@ -114,8 +127,17 @@
   }
 
   .selected {
-      background-color: rgb(54, 59, 80);
+      background-color:var(--item-selected-background);
+      color:var(--item-selected-color) !important;
   }
 
+}
 
+.test {
+  &.tree-menu {
+    // background-color: black;
+    .item:hover {
+     // background-color: red;
+    }
+  }
 }

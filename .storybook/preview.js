@@ -66,3 +66,14 @@
  *
  * Will add a new dropdown in your toolbar with options light and dark.
  **/
+
+ export const parameters = {
+    darkMode: {
+      // Set the initial theme
+      // current: 'light',
+      darkClass:"dark",
+      lightClass:"light",
+      classTarget:'html',
+      stylePreview:true,
+    },
+  };

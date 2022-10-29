@@ -53,7 +53,10 @@ const TreeMenu = React.forwardRef<TreeMenuActions,TreeMenuProps>((props,ref) => 
 		onClick,
 		onToggle,
 		initialCollapsed,
-		initialSelected } = props;
+		initialSelected,
+		classPrefix,
+		theme
+	} = props;
 	const [data,setData] = useState<TreeMenuItemType[]>([]);
 	const [selected,setSelected] = useState<ItemProps>();
 	const [changed,setChanged] = useState(false);
@@ -235,7 +238,7 @@ const TreeMenu = React.forwardRef<TreeMenuActions,TreeMenuProps>((props,ref) => 
 	};
 
 	return (
-		<div className="tree-menu" ref={setRef}>
+		<div className={clsx(classPrefix,theme,"tree-menu")} ref={setRef}>
 			{menu}
 		</div>
 	);

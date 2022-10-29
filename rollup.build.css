@@ -8,18 +8,11 @@
     --font-color: #fafafa;
   }
 }
-/*
-@mixin font-defaults {
-  font-family: $font-family;
-}
-
-@mixin heading {
-  @include font-defaults;
-
+.heading {
+  font-family: "Avenir Next", Helvetica, Arial, sans-serif;
   font-size: 40px;
   font-weight: bold;
 }
-*/
 .tree-menu {
   -webkit-touch-callout: none;
   /* iOS Safari */
@@ -94,4 +87,7 @@
 }
 .tree-menu .selected {
   background-color: #363b50;
+}
+.test.tree-menu {
+  background-color: black;
 }
