@@ -1,7 +1,7 @@
 // Generated with util/create-component.js
 import React,{ useEffect,createRef } from "react";
 import TreeMenu,{ TreeMenuItem,TreeMenuActions } from "./TreeMenu";
-import { FaInfo,FaTable, FaFolderOpen,FaFolder, FaChevronRight } from "react-icons/fa";
+import { FaSignInAlt,FaSign,FaSignOutAlt, FaCog,FaCogs, FaInfo,FaTable, FaFolderOpen,FaFolder, FaChevronRight, FaStar, FaArchive } from "react-icons/fa";
 // import * as DarkModeToggle from "https://googlechromelabs.github.io/dark-mode-toggle/src/dark-mode-toggle.mjs";
 
 
@@ -11,7 +11,7 @@ type MarkerProps = {
 
 const Badge : React.FC<MarkerProps> = ({ color }) => {
 
-	const [counter,setCounter] = React.useState("");
+	const [counter,setCounter] = React.useState("Custom");
 	useEffect(()=>{
 		const tm = setInterval(()=>setCounter(new Date().toLocaleTimeString()),1000);
 		return () => {
@@ -40,31 +40,34 @@ const ITEMS : TreeMenuItem[] = [
 	{
 		id:"heading",
 		title:"Heading",
-		info:"Tree menu sample",
+		info:"TreeMenu sample",
 		unselectable:false,
-		badge:<Badge color="red" />
+		icon:<FaStar color="white" />
+		// badge:<Badge color="red" />
 	},
 	{ 		
-		id:"main",title:"Main Menu 1",
+		id:"main",
+		title:"TreeMenu",
+		icon:<FaArchive />,
 		childs:[
 			{
 				id:"home",
-				title:"Home",
-				info:"Welcome",
+				title:"Demo",
+				info:"Welcome to TreeMenu",
 				infoClass:"heading",
 				style:{
 					// fontSize:24
 				},
 				unselectable:false,
-				// icon:<Icon icon="array" />
 			},
 			{
 				id:"node",
 				icon:<FaInfo />,
-				title:<div><Badge color="orange" /></div>,
-				info:"Custom title",
+				title:<Badge color="orange" />,
+				info:"Item with custom title",
 				childs:[
-					{ id:"n1",title:"Hello !" }
+					{ id:"n1",title:"Sub item 1" },
+					{ id:"n2",title:"Sub item 2" }
 				]
 			},
 			{
@@ -75,24 +78,26 @@ const ITEMS : TreeMenuItem[] = [
 			},
 			{
 				id:"sub",
-				title:"Sub menu 1",
+				title:"Nested subs",
 				info:"This is sub menu",
 				disabled:false,
 				unselectable:false,
 				// collapsed:false,
 				// icon:<Icon icon="add" />,
 				childs:[
-					{ id:"m1",title:"sub menu 1",disabled:true,
+					{ id:"m1",title:"Sub menu 1",
+						disabled:true,
+						info:"(disabled)"
 					},
-					{ id:"m2",title:"sub menu 2" },
-					{ id:"m3",title:"sub menu 3",
+					{ id:"m2",title:"Sub menu 2" },
+					{ id:"m3",title:"Sub menu 3",
 						childs:[
-							{ id:"t1",title:"title 3" },
-							{ id:"t2",title:"title 4" },
-							{ id:"deep",title:"DEEPER",
+							{ id:"t1",title:"Nested 1" },
+							{ id:"t2",title:"Nested 1" },
+							{ id:"deep",title:"Going Deeper",
 				
 								childs:[
-									{ id:"LAST",title:"HELLO" }
+									{ id:"LAST",title:"Hello",icon:<FaInfo color="yellow" /> }
 								] }
 						]
 					},
@@ -102,48 +107,18 @@ const ITEMS : TreeMenuItem[] = [
 			{
 				id:"set",
 				title:"Settings",
+				icon:<FaCogs />,
 				childs:[{
 					id:"opt",title:"Options",disabled:true
 				},
-				{ id:"m5",title:"menu 322" },
-				{ id:"m6",title:"menu 32 " },
-				{ id:"m7",title:"menu 23e23e" },
+				{ id:"m5",title:"Information" },
+				{ id:"m6",title:"Profile" },
+				{ id:"m7",title:"Bugs" },
 
 				]
 			},
-			{
-				id:"tes3t",
-				title:"Exit"
-			},
-			{
-				id:"set3",
-				title:"Settings3",
-				childs:[{
-					id:"opt3",title:"Options",disabled:true
-				},
-				{ id:"m53",title:"menu 322" },
-				{ id:"m63",title:"menu 32 " },
-				{ id:"m73",title:"menu 23e23e" },
-				]
-			},
-			{
-				id:"tes3t1",
-				title:"Exit"
-			},
-			{
-				id:"set31",
-				collapsed:false,
-				title:"Settings31",
-				childs:[{
-					id:"opt331",title:"Options",disabled:true
-				},
-				{ id:"m531",title:"menu 322" },
-				{ id:"m631",title:"menu 32 " },
-				{ id:"m731",title:"menu 23e23e" },
-				]
-			},
 		] },
-	{ title:"EXIT APP",id:"exit" }
+	{ title:"EXIT APP",id:"exit",icon:<FaSignOutAlt /> }
 ];
 
 
@@ -186,13 +161,13 @@ export const FullSample = ()  => {
 			<TreeMenu 
 				classPrefix="test"
 				// initialCollapsed
-				theme="dark"
+				// theme="dark"
 				enableRotate={true}
-				initialSelected="LAST"
-				ref={ref}
+				// initialSelected="LAST"
+				// ref={ref}
 				items={ITEMS}
 				renderGroupState={<FaChevronRight />}
-				renderIcon={renderIcon}
+				// renderIcon={renderIcon}
 				//renderGroupState={renderGroupState}
 				renderBadge={renderMarker} 
 				onClick={onClick} 
