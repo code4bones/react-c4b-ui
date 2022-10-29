@@ -1,13 +1,11 @@
 // Generated with util/create-component.js
-import React,{useEffect,createRef} from "react";
-import TreeMenu,{TreeMenuItem,TreeMenuActions} from "./TreeMenu";
+import React,{ useEffect,createRef } from "react";
+import TreeMenu,{ TreeMenuItem,TreeMenuActions } from "./TreeMenu";
 
-export default {
-    title: "TreeMenu"
-};
 
 const ITEMS : TreeMenuItem[] = [
-	{ id:"main",title:"Main Menu",
+	{ 
+		id:"main",title:"Main Menu",
 		childs:[
 			{
 				id:"home",
@@ -39,7 +37,7 @@ const ITEMS : TreeMenuItem[] = [
 							{ id:"deep",title:"DEEPER",
 				
 								childs:[
-									{ id:"LAST",title:"HELLO"}
+									{ id:"LAST",title:"HELLO" }
 								] }
 						]
 					},
@@ -94,6 +92,11 @@ const ITEMS : TreeMenuItem[] = [
 ];
 
 
+export default {
+	title: "TreeMenu"
+};
+
+
 
 const Marker = () => {
 
@@ -137,21 +140,21 @@ export const WithBar = ()  => {
 		console.log(...args);
 	};
 
-return (
-  <div style={{maxWidth:400}}>
-  <TreeMenu 
-    // initialCollapsed
-    initialSelected="LAST"
-    ref={ref}
-    items={ITEMS}
-    // renderGroupIcon={<Icon icon="caret-right" />}
-    renderBadge={renderMarker} 
-    onClick={onClick} 
-    onToggle={onToggle}
-    />
-    </div>
-    )
-}
+	return (
+		<div style={{ maxWidth:400 }}>
+			<TreeMenu 
+				// initialCollapsed
+				initialSelected="LAST"
+				ref={ref}
+				items={ITEMS}
+				// renderGroupIcon={<Icon icon="caret-right" />}
+				renderBadge={renderMarker} 
+				onClick={onClick} 
+				onToggle={onToggle}
+			/>
+		</div>
+	);
+};
 
 export const WithBaz = WithBar;
 

@@ -1,57 +1,10 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
-import React, { useCallback, useEffect, useMemo, useState,createContext, useRef, useImperativeHandle } from "react";
+import React, {  useEffect, useMemo, useState, useImperativeHandle } from "react";
 import clsx from "clsx";
+import { TreeMenuItem,TreeMenuProps,ItemProps,ItemRenderProps,TreeMenuItemType } from "./TreeMenu.types";
 import "./TreeMenu.less";
-// import { Icon } from "@blueprintjs/core";
 
-type ItemProps = {
-    level?:number;
-    title:string;
-    info?:string;
-    route?:string;
-    titleClass?:string;
-    infoClass?:string;
-    style?:React.CSSProperties;
-    infoStyle?:React.CSSProperties;
-    classes?:Set<string>;
-    disabled?:boolean;
-    id:string;
-    collapsed?:boolean;
-    unselectable?:boolean;
-    hasChilds?:boolean;
-    icon?:React.ReactElement;
-    onClick?:(item:ItemProps) => void; 
-}
-
-type MenuItem = Omit<ItemProps,"level" | "classes" | "hasChilds" | "onClick">;
-
-export type TreeMenuItem = {
-    childs?:TreeMenuItem[];
-} & MenuItem;
-
-type TreeMenuItemType = {
-    parent?:TreeMenuItemType;
-    childs?:TreeMenuItemType[];
-} & ItemProps;
-
-type RenderType = (id:string) => React.ReactElement | undefined | null; 
-
-type TreeMenuProps = {
-    items:TreeMenuItem[];
-    initialCollapsed?:boolean;
-    initialSelected?:string;    
-    renderBadge?:RenderType;
-    renderGroupIcon?:RenderType | React.ReactElement | null;
-    onClick?:(id:string) => void;
-    onToggle?:(id?:string,collapsed?:boolean) => void;
-    // renderItem?:(item:TreeMenuItem) => React.ReactElement;
-}
-
-type ItemRenderProps = {
-    renderBadge?:TreeMenuProps["renderBadge"];
-    renderGroup?:TreeMenuProps["renderGroupIcon"];
-} & ItemProps;
-
+export { TreeMenuItem };
 
 const Item : React.FC<ItemRenderProps> = (props) => {
 	const { 

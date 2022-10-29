@@ -50,6 +50,7 @@
  *
  * For example:
  *
+ * 
  * export const globalTypes = {
  *   theme: {
  *     name: 'Theme',
