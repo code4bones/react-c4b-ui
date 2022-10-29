@@ -1,2 +1,1 @@
-import TreeMenu from "./TreeMenu/TreeMenu";
-export { TreeMenu };
+export * from "./TreeMenu/TreeMenu";

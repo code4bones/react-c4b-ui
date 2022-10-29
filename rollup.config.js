@@ -38,6 +38,11 @@ export default {
 					dest: "build",
 					rename: "variables.less"
 				},
+				{
+					src: "rollup.build.css",
+					dest: "build",
+					rename: "styles.css"
+				},
 			]
 		})
 	]

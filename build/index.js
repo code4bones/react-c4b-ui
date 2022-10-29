@@ -1,7 +1,5 @@
 'use strict';
 
-Object.defineProperty(exports, '__esModule', { value: true });
-
 var React = require('react');
 
 function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
@@ -222,6 +220,4 @@ var TreeMenu = React__default["default"].forwardRef(function (props, ref) {
     return (React__default["default"].createElement("div", { className: clsx(classPrefix, theme, "tree-menu"), ref: setRef }, menu));
 });
 TreeMenu.displayName = "TreeMenu";
-
-exports.TreeMenu = TreeMenu;
 //# sourceMappingURL=index.js.map
