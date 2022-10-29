@@ -1,0 +1,121 @@
+// Generated with util/create-component.js
+@import "../variables.less";
+@import "../typography.less";
+
+
+
+.tree-menu {
+    
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+   -khtml-user-select: none; /* Konqueror HTML */
+     -moz-user-select: none; /* Old versions of Firefox */
+      -ms-user-select: none; /* Internet Explorer/Edge */
+          user-select: none; /* Non-prefixed version, currently */
+
+  .group {
+      transition: all .3s cubic-bezier(0.81, 0.58, 0.48, 1.41);
+  }
+
+  .folder {
+      transition: all .2s linear;
+      margin-right: 5px;
+  }
+
+  .wrapper {
+      // margin-top: 2px;
+      // margin-bottom: 2px;
+  }
+
+  .item {
+      // background-color: rgb(45, 56, 56);
+      cursor: pointer;
+      transition: all .3s ease-in;
+
+      &.disabled {
+          pointer-events: none;
+          color: rgb(110, 110, 110);
+      }
+
+      &:hover {
+          color: rgb(62, 174, 230);
+          background-color: rgb(60, 63, 76);
+          transition: all .3s ease-in;
+          opacity: 1;
+      }
+
+      &.hasChilds {
+          font-weight: 800;
+
+          .folder {
+          }
+
+      }
+
+      ~ .group {
+          max-height: var(--mh);
+          overflow: hidden;
+
+          &.disabled {
+              pointer-events: none;
+              color: rgb(110, 110, 110);
+          }
+
+      }
+      &.collapsed {
+          ~ .group  {
+              max-height: 0px;
+              overflow: hidden;
+          }
+
+      }
+
+      &.expanded {
+          ~ .group {
+
+          }
+
+          .folder {
+              transform: rotate(90deg);
+          }
+
+      }
+
+      > .content {
+          padding: 10px;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+
+          > .folder {
+
+          }
+
+          > .icon {
+              display: flex;
+              padding-right: 5px;                
+              // border:1px solid white;
+          }
+          > .title {
+              display: flex;
+              flex-grow: 1;
+              flex-direction: column;
+
+              > .info {
+                  font-size: .7em;
+                  color: orange;
+              }
+          }
+          
+          > .marker {
+
+          }
+      }
+  }
+
+  .selected {
+      background-color: rgb(54, 59, 80);
+  }
+
+
+}

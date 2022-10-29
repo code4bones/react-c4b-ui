@@ -1,3 +1,3 @@
-import TestComponent from "./TestComponent";
+import TreeMenu from "./TreeMenu/TreeMenu";
 
-export { TestComponent };
+export { TreeMenu };

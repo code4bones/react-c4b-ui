@@ -1,0 +1,97 @@
+:root {
+  --background: #fff;
+  --font-color: #494949;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #3c3c3c;
+    --font-color: #fafafa;
+  }
+}
+/*
+@mixin font-defaults {
+  font-family: $font-family;
+}
+
+@mixin heading {
+  @include font-defaults;
+
+  font-size: 40px;
+  font-weight: bold;
+}
+*/
+.tree-menu {
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  -khtml-user-select: none;
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Old versions of Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently */
+}
+.tree-menu .group {
+  transition: all 0.3s cubic-bezier(0.81, 0.58, 0.48, 1.41);
+}
+.tree-menu .folder {
+  transition: all 0.2s linear;
+  margin-right: 5px;
+}
+.tree-menu .item {
+  cursor: pointer;
+  transition: all 0.3s ease-in;
+}
+.tree-menu .item.disabled {
+  pointer-events: none;
+  color: #6e6e6e;
+}
+.tree-menu .item:hover {
+  color: #3eaee6;
+  background-color: #3c3f4c;
+  transition: all 0.3s ease-in;
+  opacity: 1;
+}
+.tree-menu .item.hasChilds {
+  font-weight: 800;
+}
+.tree-menu .item ~ .group {
+  max-height: var(--mh);
+  overflow: hidden;
+}
+.tree-menu .item ~ .group.disabled {
+  pointer-events: none;
+  color: #6e6e6e;
+}
+.tree-menu .item.collapsed ~ .group {
+  max-height: 0px;
+  overflow: hidden;
+}
+.tree-menu .item.expanded .folder {
+  transform: rotate(90deg);
+}
+.tree-menu .item > .content {
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.tree-menu .item > .content > .icon {
+  display: flex;
+  padding-right: 5px;
+}
+.tree-menu .item > .content > .title {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+}
+.tree-menu .item > .content > .title > .info {
+  font-size: 0.7em;
+  color: orange;
+}
+.tree-menu .selected {
+  background-color: #363b50;
+}
