@@ -157,22 +157,41 @@ export const FullSample = ()  => {
 	};
 
 	return (
-		<div style={{ maxWidth:400 }}>
-			<TreeMenu 
-				classPrefix="test"
-				// initialCollapsed
-				// theme="dark"
-				enableRotate={true}
-				// initialSelected="LAST"
-				// ref={ref}
-				items={ITEMS}
-				renderGroupState={<FaChevronRight />}
-				// renderIcon={renderIcon}
-				//renderGroupState={renderGroupState}
-				renderBadge={renderMarker} 
-				onClick={onClick} 
-				onToggle={onToggle}
-			/>
+		<div style={{ display:"flex",flexDirection:"row" }}>
+			<div style={{ minWidth:400 }}>
+				<TreeMenu 
+					classPrefix="test"
+					// initialCollapsed
+					// theme="dark"
+					enableRotate={true}
+					// initialSelected="LAST"
+					// ref={ref}
+					items={ITEMS}
+					renderGroupState={<FaChevronRight />}
+					// renderIcon={renderIcon}
+					//renderGroupState={renderGroupState}
+					renderBadge={renderMarker} 
+					onClick={onClick} 
+					onToggle={onToggle}
+				/>
+			</div>
+			<div style={{ minWidth:400 }}>
+				<TreeMenu 
+					classPrefix="test"
+					// initialCollapsed
+					theme="light"
+					enableRotate={true}
+					// initialSelected="LAST"
+					// ref={ref}
+					items={ITEMS}
+					renderGroupState={<FaChevronRight />}
+					// renderIcon={renderIcon}
+					//renderGroupState={renderGroupState}
+					renderBadge={renderMarker} 
+					onClick={onClick} 
+					onToggle={onToggle}
+				/>
+			</div>
 		</div>
 	);
 };

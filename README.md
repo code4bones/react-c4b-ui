@@ -31,9 +31,9 @@
 
 
 	<TreeMenu
-	   ref={ref}
-		items={ITEMS}
-		onClick={onClick} 
+    ref={ref}
+    items={ITEMS}
+    onClick={onClick} 
 	/>
 
 ```
