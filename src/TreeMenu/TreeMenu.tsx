@@ -9,6 +9,7 @@ export { TreeMenuItem };
 const Item : React.FC<ItemRenderProps> = (props) => {
 	const { 
 		id,
+		badge,
 		titleClass,
 		infoClass,
 		enableRotate,
@@ -34,8 +35,8 @@ const Item : React.FC<ItemRenderProps> = (props) => {
 						{info}
 					</div>}
 				</div>
-				{renderBadge && <div className="marker">
-					{renderBadge(props)}
+				{(renderBadge || badge) && <div className="marker">
+					{badge || renderBadge(props)}
 				</div>}
 				{hasChilds && renderGroupState && 
                 <div className={clsx("folder",{ "enable-rotate":enableRotate })}>

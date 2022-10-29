@@ -11,6 +11,7 @@ export type ItemProps = {
     infoStyle?:React.CSSProperties;
     classes?:Set<string>;
     disabled?:boolean;
+    badge?:string | React.ReactElement;
     id:string;
     collapsed?:boolean;
     unselectable?:boolean;

@@ -11,9 +11,9 @@ type MarkerProps = {
 
 const Badge : React.FC<MarkerProps> = ({ color }) => {
 
-	const [counter,setCounter] = React.useState(0);
+	const [counter,setCounter] = React.useState("");
 	useEffect(()=>{
-		const tm = setInterval(()=>setCounter(counter+1),1000);
+		const tm = setInterval(()=>setCounter(new Date().toLocaleTimeString()),1000);
 		return () => {
 			clearInterval(tm);
 		};
@@ -41,7 +41,8 @@ const ITEMS : TreeMenuItem[] = [
 		id:"heading",
 		title:"Heading",
 		info:"Tree menu sample",
-		unselectable:true
+		unselectable:false,
+		badge:<Badge color="red" />
 	},
 	{ 		
 		id:"main",title:"Main Menu 1",
