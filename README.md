@@ -30,7 +30,17 @@
 
 ```tsx
 
-	const ITEMS :  TreeMenuItem[] = [{ ... }]
+  import  {TreeMenu, TreeMenuActions,TreeMenuItem }  from "@code4bones/react-c4b-ui";
+  import "@code4bones/react-c4b-ui/build/styles.css";
+
+	const ITEMS :  TreeMenuItem[] = [{
+    id:"item1",
+    title:"Item 1",
+    childs:[{
+      id:"sub",
+      title:"Subitem 1",
+    }]
+  }]
 
 	const ref = createRef<TreeMenuActions>();
 

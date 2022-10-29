@@ -214,4 +214,6 @@ var TreeMenu = React.forwardRef(function (props, ref) {
     return (React.createElement("div", { className: clsx(classPrefix, theme, "tree-menu"), ref: setRef }, menu));
 });
 TreeMenu.displayName = "TreeMenu";
+
+export { TreeMenu };
 //# sourceMappingURL=index.esm.js.map
