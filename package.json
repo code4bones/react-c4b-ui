@@ -43,6 +43,7 @@
   "devDependencies": {
     "@babel/core": "^7.15.0",
     "@rollup/plugin-commonjs": "^17.1.0",
+    "@rollup/plugin-image": "^3.0.1",
     "@rollup/plugin-node-resolve": "^11.2.1",
     "@storybook/builder-webpack5": "^6.5.13",
     "@storybook/manager-webpack5": "^6.5.13",
