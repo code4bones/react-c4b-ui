@@ -24,7 +24,7 @@
 ### Install
 
 
-`$ npm install react-c4b-ui`
+`$ yarn add @code4bones/react-c4b-ui`
 
 #### Initial usage
 
