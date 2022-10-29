@@ -9,7 +9,8 @@
 
 # react-c4b-ui
 
-![npm](https://img.shields.io/npm/dt/@code4bones/react-c4b-ui?style=flat-square)
+![npm](https://img.shields.io/npm/v/@code4bones/react-c4b-ui?label=latest)
+![npm](https://img.shields.io/npm/dt/@code4bones/react-c4b-ui?style=flat-square&label=installs)
 
 ![](https://img.shields.io/github/downloads/code4bones/react-c4b-ui/total) ![](https://img.shields.io/github/watchers/code4bones/react-c4b-ui) ![](https://img.shields.io/github/forks/code4bones/react-c4b-ui)  ![](https://img.shields.io/github/release/code4bones/react-c4b-ui) ![](https://img.shields.io/github/issues/code4bones/react-c4b-ui)
 
@@ -27,29 +28,31 @@
 
 `$ yarn add @code4bones/react-c4b-ui`
 
-#### Initial usage
+#### Brief
 
 ```tsx
 
-  import  {TreeMenu, TreeMenuActions,TreeMenuItem }  from "@code4bones/react-c4b-ui";
-  import "@code4bones/react-c4b-ui/build/styles.css";
+import  {TreeMenu, TreeMenuActions,TreeMenuItem }  from "@code4bones/react-c4b-ui";
+import "@code4bones/react-c4b-ui/build/styles.css";
 
-	const ITEMS :  TreeMenuItem[] = [{
-		id:"item1",
-		title:"Item 1",
-			childs:[{
-				id:"sub",
-				title:"Subitem 1",
-		}]
-  }];
+const ITEMS : TreeMenuItem[] = [{
+  id:"item1",
+  title:"Item 1",
+  // other TreeMenuItem's props
+    childs:[{
+     id:"sub",
+     title:"Subitem 1",
+   }]
+}];
 
-	const ref = createRef<TreeMenuActions>();
+// if your need to use exponsed actions
+const ref = createRef<TreeMenuActions>();
 
-	<TreeMenu
-		ref={ref}
-		tems={ITEMS}
-		onClick={onClick} 
-	/>
+<TreeMenu
+  ref={ref}
+  tems={ITEMS}
+  onClick={onClick} 
+/>
 
 ```
 
