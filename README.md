@@ -9,8 +9,9 @@
 
 # react-c4b-ui
 
+![npm](https://img.shields.io/npm/dt/@code4bones/react-c4b-ui?style=flat-square)
 
-![](https://img.shields.io/github/downloads/code4bones/react-c4b-ui/v1/total) ![](https://img.shields.io/github/watchers/code4bones/react-c4b-ui) ![](https://img.shields.io/github/forks/code4bones/react-c4b-ui) ![](https://img.shields.io/github/tag/code4bones/react-c4b-ui) ![](https://img.shields.io/github/release/code4bones/react-c4b-ui) ![](https://img.shields.io/github/issues/code4bones/react-c4b-ui)
+![](https://img.shields.io/github/downloads/code4bones/react-c4b-ui/total) ![](https://img.shields.io/github/watchers/code4bones/react-c4b-ui) ![](https://img.shields.io/github/forks/code4bones/react-c4b-ui)  ![](https://img.shields.io/github/release/code4bones/react-c4b-ui) ![](https://img.shields.io/github/issues/code4bones/react-c4b-ui)
 
 ### Links
 
@@ -34,21 +35,20 @@
   import "@code4bones/react-c4b-ui/build/styles.css";
 
 	const ITEMS :  TreeMenuItem[] = [{
-    id:"item1",
-    title:"Item 1",
-    childs:[{
-      id:"sub",
-      title:"Subitem 1",
-    }]
-  }]
+		id:"item1",
+		title:"Item 1",
+			childs:[{
+				id:"sub",
+				title:"Subitem 1",
+		}]
+  }];
 
 	const ref = createRef<TreeMenuActions>();
 
-
 	<TreeMenu
-    ref={ref}
-    items={ITEMS}
-    onClick={onClick} 
+		ref={ref}
+		tems={ITEMS}
+		onClick={onClick} 
 	/>
 
 ```

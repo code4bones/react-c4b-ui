@@ -15,6 +15,9 @@
     "generate": "node ./util/create-component",
     "prepublishOnly": "npm run build"
   },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },  
   "repository": {
     "type": "git",
     "url": "git+https://github.com/code4bones/react-c4b-ui.git"
