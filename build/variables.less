@@ -1,0 +1,52 @@
+
+
+.tree-menu { 
+  --font-family:"Avenir Next", Helvetica, Arial, sans-serif;
+  --item-padding:5px;
+  --item-height:24px;
+}
+
+.dark-colors() {
+    --tree-background:rgb(36, 37, 57);
+    --item-title:rgba(225, 225, 225, 0.787);
+    --item-info: #c8a636;
+    --item-group-icon:rgb(255, 140, 0);
+    --item-selected-background:rgba(148, 185, 247, 0.364);
+    --item-selected-color:rgb(255, 255, 255);
+    --item-hover-background:rgba(89, 100, 102, 0.692);
+    --item-hover-color:rgb(4, 197, 255);
+    --item-disabled-color:rgba(129, 129, 129, 0.533);
+}
+
+.light-colors() {
+  --tree-background:rgb(255, 255, 255);
+  --item-title:rgba(31, 31, 31, 0.787);
+  --item-info: #79aaff;
+  --item-group-icon:rgb(186, 190, 194);
+  --item-selected-background:rgba(129, 129, 129, 0.364);
+  --item-selected-color:rgb(32, 32, 32);
+  --item-hover-background:rgba(0, 0, 0, 0.063);
+  --item-hover-color:rgb(0, 0, 0);
+  --item-disabled-color:rgba(129, 129, 129, 0.533);
+}
+
+
+@media (prefers-color-scheme: light) {
+  .tree-menu {
+    .light-colors();
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .tree-menu {
+    .dark-colors();
+  }
+}
+
+.dark.tree-menu, .dark .tree-menu {
+  .dark-colors();
+}
+
+.light.tree-menu, .light .tree-menu {
+  .light-colors();
+}
