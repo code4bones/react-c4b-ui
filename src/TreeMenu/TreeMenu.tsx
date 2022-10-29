@@ -8,9 +8,14 @@ export { TreeMenuItem };
 
 const Item : React.FC<ItemRenderProps> = (props) => {
 	const { 
+		id,
 		titleClass,
 		infoClass,
-		id,icon,info,renderBadge,renderGroup, 
+		enableRotate,
+		icon,info,
+		renderBadge,
+		renderGroupState,
+		renderIcon, 
 		hasChilds,disabled, onClick,level = 0,
 		style,classes = [] } = props;
 	const padding = icon && hasChilds ? 3 : 0;
@@ -19,6 +24,10 @@ const Item : React.FC<ItemRenderProps> = (props) => {
 			className={clsx("item",{ hasChilds,disabled },Array.from(classes))} onClick={() => onClick && onClick(props)}>
 			<div className="content">
 				{icon && <div className="icon">{icon}</div>}
+				{renderIcon && 
+                <div className="icon">
+                	{typeof renderIcon === "function" ? renderIcon(props) : renderIcon}
+                </div>}    
 				<div className={clsx("title",titleClass)}>
 					{props.title}
 					{info && <div className={clsx("info",infoClass)}>
@@ -26,11 +35,11 @@ const Item : React.FC<ItemRenderProps> = (props) => {
 					</div>}
 				</div>
 				{renderBadge && <div className="marker">
-					{renderBadge(id)}
+					{renderBadge(props)}
 				</div>}
-				{hasChilds && renderGroup && 
-                <div className="folder">
-                	{typeof renderGroup === "function" ? renderGroup(id) : renderGroup}
+				{hasChilds && renderGroupState && 
+                <div className={clsx("folder",{ "enable-rotate":enableRotate })}>
+                	{typeof renderGroupState === "function" ? renderGroupState(props) : renderGroupState}
                 </div>}    
 			</div>
 		</div>
@@ -49,12 +58,14 @@ const TreeMenu = React.forwardRef<TreeMenuActions,TreeMenuProps>((props,ref) => 
 	const { 
 		items,
 		renderBadge,
-		renderGroupIcon,
+		renderGroupState,
+		renderIcon,
 		onClick,
 		onToggle,
 		initialCollapsed,
 		initialSelected,
 		classPrefix,
+		enableRotate,
 		theme
 	} = props;
 	const [data,setData] = useState<TreeMenuItemType[]>([]);
@@ -123,6 +134,7 @@ const TreeMenu = React.forwardRef<TreeMenuActions,TreeMenuProps>((props,ref) => 
 		setSelected(item);
 	};
 
+	// methods for parent
 	useImperativeHandle(ref,()=>({
 		enable:enableItem,
 		getItem,
@@ -136,10 +148,8 @@ const TreeMenu = React.forwardRef<TreeMenuActions,TreeMenuProps>((props,ref) => 
 				item.parent = parent;
 			const { childs } = item;
 			item.level = level;
-			// item.classes = item.childs?.length ? new Set([item.collapsed ? "collapsed":"expanded"]) : new Set([]);
 			if ( childs ) {
 				item.hasChilds = true;
-				//item.collapsed = item.collapsed || initialCollapsed;
 				item.classes = new Set(["expanded"]);
 				item.childs = transform(childs,level+1,item);
 			} else {
@@ -189,6 +199,7 @@ const TreeMenu = React.forwardRef<TreeMenuActions,TreeMenuProps>((props,ref) => 
 	};
 	const render = (list:TreeMenuItemType[]) => {
 		const onRef = (r:HTMLDivElement) => {
+			// set initial max-height to element height to fix sliding menu time gap ( max-height: 1000 is to much ! -:) ))
 			if ( r && !r.style.getPropertyValue("--mh") ) {
 				const height = r.clientHeight;
 				r.style.setProperty("--mh",`${height}px`);
@@ -196,24 +207,25 @@ const TreeMenu = React.forwardRef<TreeMenuActions,TreeMenuProps>((props,ref) => 
 		};
 		const view = list.map((item,index)=>{
 			const { childs } = item;
+			const commonProps = {
+				...item, 
+				onClick:() => _onClick(item), 
+				renderBadge,
+				enableRotate,
+				renderGroupState,
+				renderIcon,
+			};
 			if ( childs ) {
 				return (
 					<div ref={onRef} key={index} className="wrapper">
-						<Item 
-							key={item.id} 
-							{...item} 
-							disabled={false} 
-							onClick={() => _onClick(item)} 
-							renderBadge={renderBadge} 
-							renderGroup={renderGroupIcon}
-						/>
+						<Item key={item.id} disabled={false} {...commonProps} />
 						<div ref={onRef} className={clsx("group",{ disabled:item.disabled })} id={`group_${item.id}`}>
 							{render(childs)}
 						</div>
 					</div>
 				);
 			}
-			return (<Item key={item.id} {...item} onClick={() => _onClick(item)} renderGroup={renderGroupIcon} renderBadge={renderBadge} />);
+			return (<Item key={item.id} {...commonProps} />);
 		});
 		return <div className="group">{view}</div>;
 	};
@@ -223,16 +235,18 @@ const TreeMenu = React.forwardRef<TreeMenuActions,TreeMenuProps>((props,ref) => 
 	},[data,selected,changed]);
 
 	const setRef = (ref:HTMLDivElement) => {
+		// handle first render, to process initial states
 		if (!once && ref?.clientHeight > 0 ) {
-			setOnce(true);
+			setOnce(true); // only once ( need to handle "resize" to reset ???? )
 			iteratateItems(data,(item)=>{
 				if ( !("collapsed" in item) )
 					item.collapsed = item.collapsed || initialCollapsed;
 				setCollapse(item);
 			});
 			if ( initialSelected ) {
+				// will trigger rerender
 				selectItem(initialSelected);
-			} else 
+			} else  // trigger rerender
 				setChanged(!changed);
 		}
 	};

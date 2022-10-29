@@ -1,12 +1,53 @@
-:root {
-  --background: #fff;
-  --font-color: #494949;
+.tree-menu {
+  --font-family: "Avenir Next", Helvetica, Arial, sans-serif;
+}
+@media (prefers-color-scheme: light) {
+  .tree-menu {
+    --tree-background: #ffffff;
+    --item-title: rgba(31, 31, 31, 0.787);
+    --item-info: #79aaff;
+    --item-group-icon: red;
+    --item-selected-background: rgba(129, 129, 129, 0.364);
+    --item-selected-color: #202020;
+    --item-hover-background: rgba(0, 0, 0, 0.063);
+    --item-hover-color: #000000;
+    --item-disabled-color: rgba(129, 129, 129, 0.533);
+  }
 }
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #3c3c3c;
-    --font-color: #fafafa;
+  .tree-menu {
+    --tree-background: #242539;
+    --item-title: rgba(225, 225, 225, 0.787);
+    --item-info: #c8a636;
+    --item-group-icon: red;
+    --item-selected-background: rgba(148, 185, 247, 0.364);
+    --item-selected-color: #ffffff;
+    --item-hover-background: rgba(89, 100, 102, 0.692);
+    --item-hover-color: #04c5ff;
+    --item-disabled-color: rgba(129, 129, 129, 0.533);
   }
+}
+.dark .tree-menu {
+  --tree-background: #242539;
+  --item-title: rgba(225, 225, 225, 0.787);
+  --item-info: #c8a636;
+  --item-group-icon: red;
+  --item-selected-background: rgba(148, 185, 247, 0.364);
+  --item-selected-color: #ffffff;
+  --item-hover-background: rgba(89, 100, 102, 0.692);
+  --item-hover-color: #04c5ff;
+  --item-disabled-color: rgba(129, 129, 129, 0.533);
+}
+.light .tree-menu {
+  --tree-background: #ffffff;
+  --item-title: rgba(31, 31, 31, 0.787);
+  --item-info: #79aaff;
+  --item-group-icon: red;
+  --item-selected-background: rgba(129, 129, 129, 0.364);
+  --item-selected-color: #202020;
+  --item-hover-background: rgba(0, 0, 0, 0.063);
+  --item-hover-color: #000000;
+  --item-disabled-color: rgba(129, 129, 129, 0.533);
 }
 .heading {
   font-family: "Avenir Next", Helvetica, Arial, sans-serif;
@@ -14,6 +55,8 @@
   font-weight: bold;
 }
 .tree-menu {
+  background-color: var(--tree-background);
+  font-family: var(--font-family);
   -webkit-touch-callout: none;
   /* iOS Safari */
   -webkit-user-select: none;
@@ -37,14 +80,15 @@
 .tree-menu .item {
   cursor: pointer;
   transition: all 0.3s ease-in;
+  color: var(--item-title);
 }
 .tree-menu .item.disabled {
   pointer-events: none;
-  color: #6e6e6e;
+  color: var(--item-disabled-color);
 }
 .tree-menu .item:hover {
-  color: #3eaee6;
-  background-color: #3c3f4c;
+  color: var(--item-hover-color);
+  background-color: var(--item-hover-background);
   transition: all 0.3s ease-in;
   opacity: 1;
 }
@@ -57,7 +101,7 @@
 }
 .tree-menu .item ~ .group.disabled {
   pointer-events: none;
-  color: #6e6e6e;
+  color: var(--item-disabled-color);
 }
 .tree-menu .item.collapsed ~ .group {
   max-height: 0px;
@@ -72,6 +116,9 @@
   flex-direction: row;
   align-items: center;
 }
+.tree-menu .item > .content:hover {
+  color: var(--item-hover-color);
+}
 .tree-menu .item > .content > .icon {
   display: flex;
   padding-right: 5px;
@@ -83,11 +130,9 @@
 }
 .tree-menu .item > .content > .title > .info {
   font-size: 0.7em;
-  color: orange;
+  color: var(--item-info);
 }
 .tree-menu .selected {
-  background-color: #363b50;
-}
-.test.tree-menu {
-  background-color: black;
+  background-color: var(--item-selected-background);
+  color: var(--item-selected-color) !important;
 }

@@ -1,11 +1,49 @@
 // Generated with util/create-component.js
 import React,{ useEffect,createRef } from "react";
 import TreeMenu,{ TreeMenuItem,TreeMenuActions } from "./TreeMenu";
+import { FaInfo,FaTable, FaFolderOpen,FaFolder, FaChevronRight } from "react-icons/fa";
 // import * as DarkModeToggle from "https://googlechromelabs.github.io/dark-mode-toggle/src/dark-mode-toggle.mjs";
 
 
+type MarkerProps = {
+	color:string
+};
+
+const Badge : React.FC<MarkerProps> = ({ color }) => {
+
+	const [counter,setCounter] = React.useState(0);
+	useEffect(()=>{
+		const tm = setInterval(()=>setCounter(counter+1),1000);
+		return () => {
+			clearInterval(tm);
+		};
+	});
+	return (
+		<div style={{
+			// border:"1px solid white",
+			minWidth:16,
+			display:"flex",
+			justifyContent:"center",
+			alignItems:"center",
+			borderRadius:10,
+			backgroundColor:color || "red",
+			color:"yellow",
+			fontSize:13,
+			padding:2,
+		}}>
+			{counter}
+		</div>
+	);
+};
+
 const ITEMS : TreeMenuItem[] = [
-	{ 
+	{
+		id:"heading",
+		title:"Heading",
+		info:"Tree menu sample",
+		unselectable:true
+	},
+	{ 		
 		id:"main",title:"Main Menu 1",
 		childs:[
 			{
@@ -18,6 +56,21 @@ const ITEMS : TreeMenuItem[] = [
 				},
 				unselectable:false,
 				// icon:<Icon icon="array" />
+			},
+			{
+				id:"node",
+				icon:<FaInfo />,
+				title:<div><Badge color="orange" /></div>,
+				info:"Custom title",
+				childs:[
+					{ id:"n1",title:"Hello !" }
+				]
+			},
+			{
+				id:"custom",
+				icon:<FaTable />,
+				title:"Custom info",
+				info:<div><Badge color="blue" /></div>,
 			},
 			{
 				id:"sub",
@@ -99,57 +152,47 @@ export default {
 
 
 
-const Marker = () => {
 
-	const [counter,setCounter] = React.useState(0);
-	useEffect(()=>{
-		const tm = setInterval(()=>setCounter(counter+1),1000);
-		return () => {
-			clearInterval(tm);
-		};
-	});
-	return (
-		<div>
-			{counter}
-		</div>
-	);
-};
-
-
-export const WithBar = ()  => {
+export const FullSample = ()  => {
 	const ref = createRef<TreeMenuActions>();
-	const renderMarker = (id:string) => {
+	const renderMarker = ({ id,...rest }) => {
 		if ( id === "sub" || id === "m3" || id === "LAST")
-			return <Marker />;
+			return <Badge color="green" />;
 		if ( id === "home" || id === "m2")
-			return <Marker />;
+			return <Badge color="orange" />;
+		if ( id === "n1" )
+			return <button onClick={() => alert(rest.title)}>Menu</button>;
 	};
 
 	const onClick = (id:string) => {
 		const item = ref.current?.getItem(id);
-		console.log("id",id,item);
-		// nav("/test1");
-		setTimeout(()=>{
-			//ref?.current?.collapse("deep",false);
-			// ref?.current?.select("LAST");
-		},1000);
-		//if ( item )
-		//	ref?.current?.enableItem(item.id,!item.disabled);
 	};
 
 	const onToggle = (...args:any) => {
 		console.log(...args);
 	};
 
+	const renderGroupState = (item:TreeMenuItem) => {
+		return item.collapsed ? <FaFolder /> : <FaFolderOpen/>;
+	};
+	const renderIcon = (item:TreeMenuItem) => {
+		if ( item.childs )
+			return <FaFolder style={{ marginRight:5 }} color="var(--item-group-icon)" />;
+	};
+
 	return (
 		<div style={{ maxWidth:400 }}>
 			<TreeMenu 
-				// classPrefix="light"
+				classPrefix="test"
 				// initialCollapsed
+				theme="dark"
+				enableRotate={true}
 				initialSelected="LAST"
 				ref={ref}
 				items={ITEMS}
-				// renderGroupIcon={<Icon icon="caret-right" />}
+				renderGroupState={<FaChevronRight />}
+				renderIcon={renderIcon}
+				//renderGroupState={renderGroupState}
 				renderBadge={renderMarker} 
 				onClick={onClick} 
 				onToggle={onToggle}
@@ -158,6 +201,6 @@ export const WithBar = ()  => {
 	);
 };
 
-export const WithBaz = WithBar;
+// export const WithBaz = WithBar;
 
 // export const WithBaz = () => <TreeMenu foo="baz" />;
