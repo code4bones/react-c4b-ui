@@ -64,6 +64,10 @@ const ref = createRef<TreeMenuActions>();
 
 ### Properties
 
+type `RenderFn` = (item:MenuItem) => React.ReactElement | undefined | null; 
+type `RenderType` = `RenderFn` | React.ReactElement; 
+
+
 | Propery name | Description                    | Signature
 | ------------- | ------------------------------ | ---- |
 | `items[]`      | tree menu items array       | `TreeMenuItem`[] |
@@ -72,10 +76,9 @@ const ref = createRef<TreeMenuActions>();
 | `onToggle`   |  collapse  / expand     | onToggle?:(id?:string,collapsed?:boolean) => void;|
 | `initialCollapsed`   |  initial tree state     | boolean |
 | `initialSelected`   |  initial selected item     | item's `id` : string|
-| `renderBadge`   |  item click handler     | (item:TreeMenuItem) => React.ReactElement|
-| `renderIcon`   |  Left side element of item     | onClick?:(item:TreeMenuItem) => void|
-| `renderGroupState`   | Group indicator     | onClick?:(item:TreeMenuItem) => void|
-| `renderBadge`   |  Right side element of item      | onClick?:(item:TreeMenuItem) => void|
+| `renderBadge`   |  item click handler     | `RenderType` |
+| `renderIcon`   |  Left side element of item     | `RenderType` |
+| `renderGroupState`   | Group indicator     | `RenderType` |
 | `theme`   | theme override class name     | `dark`, `light`, custom name | 
 | `classPrefix`   | container global prefix     | string |
 | `enableRotate` | Rotate collapse / expand | boolean |
