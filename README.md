@@ -22,6 +22,8 @@
 
 ![sample](https://github.com/code4bones/react-c4b-ui/blob/b861d11fd4b7d948911b386531596ff803350a00/samples.png?raw=true "sample")
 
+![cap](https://github.com/code4bones/react-c4b-ui/blob/master/TreeMenu.gif?raw=true "cap")
+
 
 ### Install
 
