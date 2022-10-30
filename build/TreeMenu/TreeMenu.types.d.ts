@@ -1,12 +1,15 @@
 /// <reference types="react" />
+declare type InfoReveal = "none" | "vertical" | "horizontal";
 export declare type ItemProps = {
     level?: number;
     title: string | React.ReactElement;
     info?: string | React.ReactElement;
+    infoReveal?: InfoReveal;
     route?: string;
     titleClass?: string;
     infoClass?: string;
     style?: React.CSSProperties;
+    titleStyle?: React.CSSProperties;
     infoStyle?: React.CSSProperties;
     classes?: Set<string>;
     disabled?: boolean;
@@ -26,7 +29,8 @@ export declare type TreeMenuItemType = {
     parent?: TreeMenuItemType;
     childs?: TreeMenuItemType[];
 } & ItemProps;
-export declare type RenderType = (item: MenuItem) => React.ReactElement | undefined | null;
+export declare type RenderFn = (item: MenuItem) => React.ReactElement | undefined | null;
+export declare type RenderType = RenderFn | React.ReactElement;
 export declare type ItemRenderProps = {
     enableRotate?: boolean;
     renderBadge?: TreeMenuProps["renderBadge"];
@@ -43,8 +47,8 @@ export interface TreeMenuProps {
     initialCollapsed?: boolean;
     initialSelected?: string;
     renderBadge?: RenderType;
-    renderIcon?: RenderType | React.ReactElement | null;
-    renderGroupState?: RenderType | React.ReactElement | null;
+    renderIcon?: RenderType;
+    renderGroupState?: RenderType;
     onClick?: (id: string) => void;
     onToggle?: (id?: string, collapsed?: boolean) => void;
 }

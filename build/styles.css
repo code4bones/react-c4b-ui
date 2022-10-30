@@ -1,7 +1,7 @@
 .tree-menu {
   --font-family: "Avenir Next", Helvetica, Arial, sans-serif;
   --item-padding: 5px;
-  --item-height: 24px;
+  --item-height: 32px;
 }
 @media (prefers-color-scheme: light) {
   .tree-menu {
@@ -137,6 +137,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  overflow: hidden;
   /*
           > .folder {
 
@@ -148,21 +149,63 @@
           }
           */
 }
-.tree-menu .item > .content:hover {
+.tree-menu .item > .content > .text .title,
+.tree-menu .item > .content .text .info {
+  overflow: hidden;
+  transition: all 0.4s ease-in-out;
+}
+.tree-menu .item > .content:hover:has(.info) {
   color: var(--item-hover-color);
+}
+.tree-menu .item > .content:hover:has(.info) > .text .title.vertical {
+  top: 0%;
+  transform: translateY(-100%);
+  opacity: 0.1;
+}
+.tree-menu .item > .content:hover:has(.info) > .text .title.horizontal {
+  top: 0%;
+  transform: translateY(-100%);
+}
+.tree-menu .item > .content:hover:has(.info) > .text .info.vertical {
+  top: 50%;
+  transform: translateY(0%);
+}
+.tree-menu .item > .content:hover:has(.info) > .text .info.horizontal {
+  position: absolute;
+  transform: translateX(0%);
+}
+.tree-menu .item > .content > .text {
+  position: relative;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+}
+.tree-menu .item > .content > .text > .title:has(~.info.vertical,~.info.horizontal) {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-grow: 1;
+  align-content: center;
+}
+.tree-menu .item > .content > .text > .info {
+  position: relative;
+  font-size: 0.7em;
+  color: var(--item-info);
+  overflow: hidden;
+  display: flex;
+  flex-grow: 1;
+}
+.tree-menu .item > .content > .text > .info.vertical {
+  transform: translateY(300%);
+}
+.tree-menu .item > .content > .text > .info.horizontal {
+  transform: translateX(-300%);
 }
 .tree-menu .item > .content > .icon {
   display: flex;
   padding-right: 5px;
-}
-.tree-menu .item > .content > .title {
-  display: flex;
-  flex-grow: 1;
-  flex-direction: column;
-}
-.tree-menu .item > .content > .title > .info {
-  font-size: 0.7em;
-  color: var(--item-info);
 }
 .tree-menu .selected {
   background-color: var(--item-selected-background);

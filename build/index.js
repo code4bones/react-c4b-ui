@@ -36,20 +36,49 @@ var __assign = function() {
 
 function r(e){var t,f,n="";if("string"==typeof e||"number"==typeof e)n+=e;else if("object"==typeof e)if(Array.isArray(e))for(t=0;t<e.length;t++)e[t]&&(f=r(e[t]))&&(n&&(n+=" "),n+=f);else for(t in e)e[t]&&(n&&(n+=" "),n+=t);return n}function clsx(){for(var e,t,f=0,n="";f<arguments.length;)(e=arguments[f++])&&(t=r(e))&&(n&&(n+=" "),n+=t);return n}
 
+// type ItemIconProps = Pick<ItemRenderProps,"icon" | "renderIcon">;
+var ItemIcon = function (props) {
+    var icon = props.icon, renderIcon = props.renderIcon;
+    var iconView = React.useMemo(function () {
+        if (!icon && !renderIcon)
+            return null;
+        return icon || (typeof renderIcon === "function" ? renderIcon(props) : renderIcon);
+    }, [icon, renderIcon]);
+    return (React__default["default"].createElement("div", { className: "icon" }, iconView));
+};
+var ItemBadge = function (props) {
+    var renderBadge = props.renderBadge, badge = props.badge;
+    var badgeView = React.useMemo(function () {
+        if (!badge && !renderBadge)
+            return null;
+        return badge || (typeof renderBadge === "function" ? renderBadge(props) : renderBadge);
+    }, [badge, renderBadge]);
+    return (React__default["default"].createElement("div", { className: "marker" }, badgeView));
+};
+var GroupState = function (props) {
+    var hasChilds = props.hasChilds, renderGroupState = props.renderGroupState, enableRotate = props.enableRotate, collapsed = props.collapsed;
+    var state = React.useMemo(function () {
+        if (!hasChilds || !renderGroupState)
+            return null;
+        return typeof renderGroupState === "function" ? renderGroupState(props) : renderGroupState;
+    }, [hasChilds, renderGroupState, enableRotate, collapsed]);
+    return (React__default["default"].createElement("div", { className: clsx("folder", { "enable-rotate": enableRotate }) }, state));
+};
+var ItemText = function (props) {
+    var title = props.title, info = props.info, titleClass = props.titleClass, infoClass = props.infoClass, _a = props.infoReveal, infoReveal = _a === void 0 ? "none" : _a, titleStyle = props.titleStyle, infoStyle = props.infoStyle;
+    return (React__default["default"].createElement("div", { className: "text" },
+        React__default["default"].createElement("div", { className: clsx("title", titleClass, infoReveal), style: titleStyle }, title),
+        info && React__default["default"].createElement("div", { className: clsx("info", infoClass, infoReveal), style: infoStyle }, info)));
+};
 var Item = function (props) {
-    props.id; var badge = props.badge, titleClass = props.titleClass, infoClass = props.infoClass, enableRotate = props.enableRotate, icon = props.icon, info = props.info, renderBadge = props.renderBadge, renderGroupState = props.renderGroupState, renderIcon = props.renderIcon, hasChilds = props.hasChilds, disabled = props.disabled, onClick = props.onClick, _a = props.level, level = _a === void 0 ? 0 : _a, style = props.style, _b = props.classes, classes = _b === void 0 ? [] : _b;
-    var padding = icon && hasChilds ? 3 : 0;
+    var icon = props.icon, hasChilds = props.hasChilds, disabled = props.disabled, onClick = props.onClick, _a = props.level, level = _a === void 0 ? 0 : _a, style = props.style, _b = props.classes, classes = _b === void 0 ? [] : _b;
+    var padding = icon && hasChilds ? 0 : 0;
     return (React__default["default"].createElement("div", { style: __assign({ paddingLeft: "".concat((level * 12) + padding, "px") }, style), className: clsx("item", { hasChilds: hasChilds, disabled: disabled }, Array.from(classes)), onClick: function () { return onClick && onClick(props); } },
         React__default["default"].createElement("div", { className: "content" },
-            icon && React__default["default"].createElement("div", { className: "icon" }, icon),
-            renderIcon &&
-                React__default["default"].createElement("div", { className: "icon" }, typeof renderIcon === "function" ? renderIcon(props) : renderIcon),
-            React__default["default"].createElement("div", { className: clsx("title", titleClass) },
-                props.title,
-                info && React__default["default"].createElement("div", { className: clsx("info", infoClass) }, info)),
-            (renderBadge || badge) && React__default["default"].createElement("div", { className: "marker" }, badge || renderBadge(props)),
-            hasChilds && renderGroupState &&
-                React__default["default"].createElement("div", { className: clsx("folder", { "enable-rotate": enableRotate }) }, typeof renderGroupState === "function" ? renderGroupState(props) : renderGroupState))));
+            React__default["default"].createElement(ItemIcon, __assign({}, props)),
+            React__default["default"].createElement(ItemText, __assign({}, props)),
+            React__default["default"].createElement(ItemBadge, __assign({}, props)),
+            React__default["default"].createElement(GroupState, __assign({}, props)))));
 };
 var TreeMenu = React__default["default"].forwardRef(function (props, ref) {
     // eslint-disable-next-line react/prop-types
