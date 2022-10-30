@@ -20,10 +20,12 @@
 
 ### System default / custom theme 
 
-![sample](https://github.com/code4bones/react-c4b-ui/blob/b861d11fd4b7d948911b386531596ff803350a00/samples.png?raw=true "sample")
+![sample](https://github.com/code4bones/react-c4b-ui/blob/master/img/theme.png?raw=true "sample")
 
-![cap](https://github.com/code4bones/react-c4b-ui/blob/master/TreeMenu.gif?raw=true "cap")
-
+|feature|sample|
+|-------|------|
+|![cap](https://github.com/code4bones/react-c4b-ui/blob/master/img/items_reveal.gif?raw=true)|  |
+![cap](https://github.com/code4bones/react-c4b-ui/blob/master/img/rorate_group.gif?raw=true)|![cap](https://github.com/code4bones/react-c4b-ui/blob/master/img/static_group.gif?raw=true)|
 
 ### Install
 
@@ -85,6 +87,7 @@ const ref = createRef<TreeMenuActions>();
     id:string;
     title:string | React.ReactElement;
     info?:string | React.ReactElement;
+    infoReveal?:InfoReveal;
     icon?:React.ReactElement;
     badge?:string | React.ReactElement;
     disabled?:boolean;
@@ -92,8 +95,8 @@ const ref = createRef<TreeMenuActions>();
     titleClass?:string;
     infoClass?:string;
     style?:React.CSSProperties;
+    titleStyle?:React.CSSProperties;
     infoStyle?:React.CSSProperties;
-
 ```
 
 `TreeMenuActions` ( use `ref` )
