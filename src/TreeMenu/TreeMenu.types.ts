@@ -1,13 +1,17 @@
 // Generated with util/create-component.js
 
+type InfoReveal = "none" | "vertical" | "horizontal";
+
 export type ItemProps = {
     level?:number;
     title:string | React.ReactElement;
     info?:string | React.ReactElement;
+    infoReveal?:InfoReveal;
     route?:string;
     titleClass?:string;
     infoClass?:string;
     style?:React.CSSProperties;
+    titleStyle?:React.CSSProperties;
     infoStyle?:React.CSSProperties;
     classes?:Set<string>;
     disabled?:boolean;
@@ -31,14 +35,15 @@ export type TreeMenuItemType = {
     childs?:TreeMenuItemType[];
 } & ItemProps;
 
-export type RenderType = (item:MenuItem) => React.ReactElement | undefined | null; 
+export type RenderFn = (item:MenuItem) => React.ReactElement | undefined | null; 
+
+export type RenderType = RenderFn | React.ReactElement; 
 
 export type ItemRenderProps = {
     enableRotate?:boolean;
     renderBadge?:TreeMenuProps["renderBadge"];
     renderGroupState?:TreeMenuProps["renderGroupState"];
     renderIcon?:TreeMenuProps["renderIcon"];
-    // renderItem?:TreeMenuProps["renderItem"];
 } & ItemProps;
 
 type Theme = "dark" | "light";
@@ -57,8 +62,8 @@ export interface TreeMenuProps {
     initialSelected?:string;    
     // custom renders
     renderBadge?:RenderType;
-    renderIcon?:RenderType | React.ReactElement | null;
-    renderGroupState?:RenderType | React.ReactElement | null;
+    renderIcon?:RenderType; 
+    renderGroupState?:RenderType;
     onClick?:(id:string) => void;
     onToggle?:(id?:string,collapsed?:boolean) => void;
 }

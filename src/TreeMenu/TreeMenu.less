@@ -98,9 +98,80 @@
           display: flex;
           flex-direction: row;
           align-items: center;
+          overflow: hidden;
+          
+          > .text .title, .text .info {
+            // display: flex;
+            // align-items: center;
+            overflow: hidden;
+            
+            transition: all .4s ease-in-out;
+          }
 
-          &:hover{
+          &:hover:has(.info) {
             color:var(--item-hover-color);
+
+            > .text .title.vertical {
+                top:0%;
+                transform: translateY(-100%);
+                opacity: .1;
+            }
+
+            >  .text .title.horizontal  {
+                top:0%;
+                transform: translateY(-100%);
+            }
+
+            > .text .info.vertical {
+                top:50%;
+                transform: translateY(0%);
+            } 
+
+            > .text .info.horizontal {
+                position: absolute;
+                transform: translateX(0%);
+            } 
+
+          }
+
+          > .text {
+
+           // border: 1px solid white;
+            position: relative;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-content: center;
+
+            
+            > .title:has(~.info.vertical,~.info.horizontal) {
+                position: absolute;
+                top:50%;
+                transform: translateY(-50%);
+                display: flex;
+                flex-grow: 1;
+                align-content: center;
+            }
+            
+
+            > .info {
+              position: relative;
+              font-size: .7em;
+              color: var(--item-info);
+              overflow: hidden;
+              display: flex;
+              flex-grow: 1;
+
+            }
+
+            > .info.vertical {
+                transform:translateY(300%);
+            }
+
+            > .info.horizontal {
+                transform:translateX(-300%);
+            }
+
           }
 
           /*
@@ -110,19 +181,13 @@
           */
 
           > .icon {
-              display: flex;
-              padding-right: 5px;                
-          }
-          > .title {
+            display: flex;
+            padding-right: 5px;                
+        }
 
-              display: flex;
-              flex-grow: 1;
-              flex-direction: column;
-              > .info {
-                  font-size: .7em;
-                  color: var(--item-info);
-              }
-          }
+
+
+
           /*
           > .marker {
 

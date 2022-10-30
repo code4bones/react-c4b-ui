@@ -2,46 +2,87 @@
 import React, {  useEffect, useMemo, useState, useImperativeHandle } from "react";
 import clsx from "clsx";
 import { TreeMenuItem,TreeMenuProps,ItemProps,ItemRenderProps,TreeMenuItemType } from "./TreeMenu.types";
-import "./TreeMenu.less";
+import  "./TreeMenu.less";
 
 export { TreeMenuItem };
 
+// type ItemIconProps = Pick<ItemRenderProps,"icon" | "renderIcon">;
+
+const ItemIcon : React.FC<ItemRenderProps> = (props) => {
+	const { icon,renderIcon } = props;
+	const iconView = useMemo(()=>{
+		if ( !icon && !renderIcon )
+		    return null;
+		return icon || (typeof renderIcon === "function" ? renderIcon(props) : renderIcon);
+	},[icon,renderIcon]);
+	return (
+		<div className="icon">
+			{iconView}
+		</div>
+	);
+};
+
+const ItemBadge : React.FC<ItemRenderProps> = (props) => {
+	const { renderBadge,badge } = props;
+	const badgeView = useMemo(()=>{
+		if ( !badge && !renderBadge )
+		    return null;
+		return badge || (typeof renderBadge === "function" ? renderBadge(props) : renderBadge);
+	},[badge,renderBadge]);
+	return (
+		<div className="marker">
+			{badgeView}
+		</div>
+	);
+};
+
+const GroupState : React.FC<ItemRenderProps> = (props) => {
+	const { hasChilds,renderGroupState,enableRotate,collapsed } = props;
+	const state = useMemo(()=>{
+		if ( !hasChilds || !renderGroupState )
+			return null;
+		return typeof renderGroupState === "function" ? renderGroupState(props) : renderGroupState;
+	},[hasChilds,renderGroupState,enableRotate,collapsed]);
+
+	return ( 
+		<div className={clsx("folder",{ "enable-rotate":enableRotate })}>
+			{state}
+		</div>
+	);
+};
+
+const ItemText : React.FC<ItemRenderProps> = (props) => {
+	const { title,info,titleClass,infoClass,infoReveal = "none",titleStyle,infoStyle } = props;
+	return (
+		<div className="text">
+			<div className={clsx("title",titleClass,infoReveal)} style={titleStyle}>
+				{title}
+			</div>
+			{info && <div className={clsx("info",infoClass,infoReveal)} style={infoStyle}>
+				{info}
+			</div>}
+		</div>
+	);
+};
+
 const Item : React.FC<ItemRenderProps> = (props) => {
 	const { 
-		id,
-		badge,
-		titleClass,
-		infoClass,
-		enableRotate,
-		icon,info,
-		renderBadge,
-		renderGroupState,
-		renderIcon, 
-		hasChilds,disabled, onClick,level = 0,
-		style,classes = [] } = props;
-	const padding = icon && hasChilds ? 3 : 0;
+		icon,
+		hasChilds,
+		disabled, 
+		onClick,level = 0,
+		style,
+		classes = [] 
+	} = props;
+	const padding = icon && hasChilds ? 0 : 0;
 	return (
 		<div style={{ paddingLeft:`${(level*12)+padding}px`,...style }} 
 			className={clsx("item",{ hasChilds,disabled },Array.from(classes))} onClick={() => onClick && onClick(props)}>
-			<div className="content">
-				{icon && <div className="icon">{icon}</div>}
-				{renderIcon && 
-                <div className="icon">
-                	{typeof renderIcon === "function" ? renderIcon(props) : renderIcon}
-                </div>}    
-				<div className={clsx("title",titleClass)}>
-					{props.title}
-					{info && <div className={clsx("info",infoClass)}>
-						{info}
-					</div>}
-				</div>
-				{(renderBadge || badge) && <div className="marker">
-					{badge || renderBadge(props)}
-				</div>}
-				{hasChilds && renderGroupState && 
-                <div className={clsx("folder",{ "enable-rotate":enableRotate })}>
-                	{typeof renderGroupState === "function" ? renderGroupState(props) : renderGroupState}
-                </div>}    
+			<div className="content">                
+				<ItemIcon {...props} />
+				<ItemText {...props} />
+				<ItemBadge {...props} />
+				<GroupState {...props} />
 			</div>
 		</div>
 	);

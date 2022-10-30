@@ -40,20 +40,39 @@ const ITEMS : TreeMenuItem[] = [
 	{
 		id:"heading",
 		title:"Heading",
-		info:"TreeMenu sample",
+		info:"Horizontal reveal infos",
 		unselectable:false,
-		icon:<FaStar color="white" />
+		infoReveal:"horizontal",
+		icon:<FaStar color="white" />,
+		titleStyle:{
+			color:"orange",
+			fontWeight:"bolder"
+		}
 		// badge:<Badge color="red" />
 	},
 	{ 		
 		id:"main",
 		title:"TreeMenu",
+		info:"Vertical reveal infos",
+		titleStyle:{
+			color:"green",
+			// lineHeight:1
+		},
+		infoStyle:{
+			color:"red",
+			fontSize:24,
+			// lineHeight:.3,
+		},
+		infoReveal:"vertical",
 		icon:<FaArchive />,
 		childs:[
 			{
 				id:"home",
-				title:"Demo",
-				info:"Welcome to TreeMenu",
+				title:"Regular Title with",
+				info:"Custom infoStyle",
+				infoStyle:{
+					fontSize:12,
+				},
 				infoClass:"heading",
 				style:{
 					// fontSize:24
@@ -65,6 +84,7 @@ const ITEMS : TreeMenuItem[] = [
 				icon:<FaInfo />,
 				title:<Badge color="orange" />,
 				info:"Item with custom title",
+				infoReveal:"vertical",
 				childs:[
 					{ id:"n1",title:"Sub item 1" },
 					{ id:"n2",title:"Sub item 2" }
@@ -78,8 +98,9 @@ const ITEMS : TreeMenuItem[] = [
 			},
 			{
 				id:"sub",
-				title:"Nested subs",
+				title:"Static goup icons",
 				info:"This is sub menu",
+				infoReveal:"horizontal",
 				disabled:false,
 				unselectable:false,
 				// collapsed:false,
@@ -149,6 +170,7 @@ export const FullSample = ()  => {
 	};
 
 	const renderGroupState = (item:TreeMenuItem) => {
+		console.log(">>>",item);
 		return item.collapsed ? <FaFolder /> : <FaFolderOpen/>;
 	};
 	const renderIcon = (item:TreeMenuItem) => {
@@ -164,13 +186,13 @@ export const FullSample = ()  => {
 					// initialCollapsed
 					// theme="dark"
 					enableRotate={true}
-					// initialSelected="LAST"
+					initialSelected="LAST"
 					// ref={ref}
 					items={ITEMS}
 					renderGroupState={<FaChevronRight />}
 					// renderIcon={renderIcon}
-					//renderGroupState={renderGroupState}
-					renderBadge={renderMarker} 
+					// renderGroupState={renderGroupState}
+					// renderBadge={renderMarker} 
 					onClick={onClick} 
 					onToggle={onToggle}
 				/>

@@ -67,6 +67,22 @@
  * Will add a new dropdown in your toolbar with options light and dark.
  **/
 
+/*
+  export const globalTypes = {
+    theme: {
+      name: 'Theme',
+      description: 'Global theme for components',
+      defaultValue: 'light',
+      toolbar: {
+        icon: 'circlehollow',
+        // array of plain string values or MenuItem shape
+        items: ['light', 'dark'],
+        },
+      },
+    };
+*/
+ 
+ 
  export const parameters = {
     darkMode: {
       // Set the initial theme
