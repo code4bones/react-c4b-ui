@@ -28,6 +28,8 @@
 
 `$ yarn add @code4bones/react-c4b-ui`
 
+#### TreeMenu
+
 #### Brief
 
 ```tsx
