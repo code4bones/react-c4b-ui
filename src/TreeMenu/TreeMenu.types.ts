@@ -1,30 +1,37 @@
 // Generated with util/create-component.js
 
-type InfoReveal = "none" | "vertical" | "horizontal";
+type InfoReveal = "always" | "vertical" | "horizontal";
 
 export type ItemProps = {
-    level?:number;
+    id:string;
+    //
     title:string | React.ReactElement;
     info?:string | React.ReactElement;
+    badge?:string | React.ReactElement;
+    control?:string | JSX.Element;
+    icon?:React.ReactElement;
+    //
     infoReveal?:InfoReveal;
-    route?:string;
+    disabled?:boolean;
+    unselectable?:boolean;
+    // classes
     titleClass?:string;
     infoClass?:string;
+    // styles
     style?:React.CSSProperties;
     titleStyle?:React.CSSProperties;
-    infoStyle?:React.CSSProperties;
+    infoStyle?:React.CSSProperties;    
+    // internal
     classes?:Set<string>;
-    disabled?:boolean;
-    badge?:string | React.ReactElement;
-    id:string;
     collapsed?:boolean;
-    unselectable?:boolean;
     hasChilds?:boolean;
-    icon?:React.ReactElement;
     onClick?:(item:ItemProps) => void; 
+    level?:number;
+    // todos
+    route?:string;
 }
 
-export type MenuItem = Omit<ItemProps,"level" | "classes" | "hasChilds" | "onClick">;
+export type MenuItem = Omit<ItemProps,"level" | "classes" | "onClick">;
 
 export type TreeMenuItem = {
     childs?:TreeMenuItem[];
@@ -35,35 +42,44 @@ export type TreeMenuItemType = {
     childs?:TreeMenuItemType[];
 } & ItemProps;
 
-export type RenderFn = (item:MenuItem) => React.ReactElement | undefined | null; 
 
+export type RenderFn = (item:MenuItem) => React.ReactElement | undefined | null; 
 export type RenderType = RenderFn | React.ReactElement; 
 
 export type ItemRenderProps = {
     enableRotate?:boolean;
-    renderBadge?:TreeMenuProps["renderBadge"];
-    renderGroupState?:TreeMenuProps["renderGroupState"];
-    renderIcon?:TreeMenuProps["renderIcon"];
+    propertyGrid?:boolean;
+    badgeVisible?:boolean;
+    treeID:string;
+    groupIconLeft?:boolean;
+    renderBadge?:RenderType;
+    renderIcon?:RenderType; 
+    renderGroupState?:RenderType;
 } & ItemProps;
 
 type Theme = "dark" | "light";
 
-export interface TreeMenuProps {
-    // item tree data
+type CommonItemProps = Pick<ItemRenderProps,
+    "infoStyle" | 
+    "titleStyle" | 
+    "infoReveal" | 
+    "enableRotate" | 
+    "badgeVisible" | 
+    "groupIconLeft" |
+    "renderBadge" |
+    "renderIcon" |
+    "renderGroupState" |
+    "treeID" |
+    "propertyGrid"
+    > 
+
+export type TreeMenuProps = {
     items:TreeMenuItem[];
-    // style scope
     theme?:Theme | string;
     // scope custom styling
     classPrefix?:string;
-    // enable expand / collapse icon rotation
-    enableRotate?:boolean;
-    infoAlwaysVisible?:boolean;
     initialCollapsed?:boolean;
     initialSelected?:string;    
-    // custom renders
-    renderBadge?:RenderType;
-    renderIcon?:RenderType; 
-    renderGroupState?:RenderType;
     onClick?:(id:string) => void;
     onToggle?:(id?:string,collapsed?:boolean) => void;
-}
+} & CommonItemProps;

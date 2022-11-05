@@ -23,7 +23,9 @@
  *
  * Each story throughout the library will be wrapped in a div with a margin of 3
  */
-
+ 
+export const decorators = [(Story) => <div style={{ overflow:"hidden" }}><Story/></div>];
+ 
 /**
  * Parameters
  *
@@ -93,3 +95,4 @@
       stylePreview:true,
     },
   };
+  

@@ -1,0 +1,147 @@
+[
+    {"info":"directory","title":"Root","badge":"Nov  4 23:52","childs":[
+      {"info":"directory","title":"Group1","badge":"Nov  4 23:52","childs":[
+        {"info":"directory","title":"SubGroupA","badge":"Nov  4 23:52","childs":[
+          {"info":"directory","title":"CategoryD","badge":"Nov  4 23:52","childs":[
+            {"info":"directory","title":"PropertiesX","badge":"Nov  4 23:52","childs":[
+              {"info":"directory","title":"PropItem","control":"Nov  4 23:52"},
+              {"info":"directory","title":"Item2","badge":"Nov  4 23:52"},
+              {"info":"directory","title":"Item3","badge":"Nov  4 23:52"},
+              {"info":"directory","title":"Item4","badge":"Nov  4 23:52"},
+              {"info":"directory","title":"Item5","badge":"Nov  4 23:52"}
+          ]},
+            {"info":"directory","title":"PropertiesY","badge":"Nov  4 23:52","childs":[
+              {"info":"directory","title":"Item1","badge":"Nov  4 23:52"},
+              {"info":"directory","title":"Item2","badge":"Nov  4 23:52"},
+              {"info":"directory","title":"Item3","badge":"Nov  4 23:52"},
+              {"info":"directory","title":"Item4","badge":"Nov  4 23:52"},
+              {"info":"directory","title":"Item5","badge":"Nov  4 23:52"}
+          ]}
+        ]},
+          {"info":"directory","title":"CategoryE","badge":"Nov  4 23:52","childs":[
+            {"info":"directory","title":"PropertiesX","badge":"Nov  4 23:52","childs":[
+              {"info":"directory","title":"Item1","badge":"Nov  4 23:52"},
+              {"info":"directory","title":"Item2","badge":"Nov  4 23:52"},
+              {"info":"directory","title":"Item3","badge":"Nov  4 23:52"},
+              {"info":"directory","title":"Item4","badge":"Nov  4 23:52"},
+              {"info":"directory","title":"Item5","badge":"Nov  4 23:52"}
+          ]},
+            {"info":"directory","title":"PropertiesY","badge":"Nov  4 23:52","childs":[
+              {"info":"directory","title":"Item1","badge":"Nov  4 23:52"},
+              {"info":"directory","title":"Item2","badge":"Nov  4 23:52"},
+              {"info":"directory","title":"Item3","badge":"Nov  4 23:52"},
+              {"info":"directory","title":"Item4","badge":"Nov  4 23:52"},
+              {"info":"directory","title":"Item5","badge":"Nov  4 23:52"}
+          ]}
+        ]}
+      ]},
+        {"info":"directory","title":"SubGroupB","badge":"Nov  4 23:52","childs":[
+          {"info":"directory","title":"CategoryD","badge":"Nov  4 23:52","childs":[
+            {"info":"directory","title":"PropertiesX","badge":"Nov  4 23:52","childs":[
+              {"info":"directory","title":"Item1","badge":"Nov  4 23:52"},
+              {"info":"directory","title":"Item2","badge":"Nov  4 23:52"},
+              {"info":"directory","title":"Item3","badge":"Nov  4 23:52"},
+              {"info":"directory","title":"Item4","badge":"Nov  4 23:52"},
+              {"info":"directory","title":"Item5","badge":"Nov  4 23:52"}
+          ]},
+            {"info":"directory","title":"PropertiesY","badge":"Nov  4 23:52","childs":[
+              {"info":"directory","title":"Item1","badge":"Nov  4 23:52"},
+              {"info":"directory","title":"Item2","badge":"Nov  4 23:52"},
+              {"info":"directory","title":"Item3","badge":"Nov  4 23:52"},
+              {"info":"directory","title":"Item4","badge":"Nov  4 23:52"},
+              {"info":"directory","title":"Item5","badge":"Nov  4 23:52"}
+          ]}
+        ]},
+          {"info":"directory","title":"CategoryE","badge":"Nov  4 23:52","childs":[
+            {"info":"directory","title":"PropertiesX","badge":"Nov  4 23:52","childs":[
+              {"info":"directory","title":"Item1","badge":"Nov  4 23:52"},
+              {"info":"directory","title":"Item2","badge":"Nov  4 23:52"},
+              {"info":"directory","title":"Item3","badge":"Nov  4 23:52"},
+              {"info":"directory","title":"Item4","badge":"Nov  4 23:52"},
+              {"info":"directory","title":"Item5","badge":"Nov  4 23:52"}
+          ]},
+            {"info":"directory","title":"PropertiesY","badge":"Nov  4 23:52","childs":[
+              {"info":"directory","title":"Item1","badge":"Nov  4 23:52"},
+              {"info":"directory","title":"Item2","badge":"Nov  4 23:52"},
+              {"info":"directory","title":"Item3","badge":"Nov  4 23:52"},
+              {"info":"directory","title":"Item4","badge":"Nov  4 23:52"},
+              {"info":"directory","title":"Item5","badge":"Nov  4 23:52"}
+          ]}
+        ]}
+      ]}
+    ]},
+      {"info":"directory","title":"Group2","badge":"Nov  4 23:52","childs":[
+        {"info":"directory","title":"SubGroupA","badge":"Nov  4 23:52","childs":[
+          {"info":"directory","title":"CategoryD","badge":"Nov  4 23:52","childs":[
+            {"info":"directory","title":"PropertiesX","badge":"Nov  4 23:52","childs":[
+              {"info":"directory","title":"Item1","badge":"Nov  4 23:52"},
+              {"info":"directory","title":"Item2","badge":"Nov  4 23:52"},
+              {"info":"directory","title":"Item3","badge":"Nov  4 23:52"},
+              {"info":"directory","title":"Item4","badge":"Nov  4 23:52"},
+              {"info":"directory","title":"Item5","badge":"Nov  4 23:52"}
+          ]},
+            {"info":"directory","title":"PropertiesY","badge":"Nov  4 23:52","childs":[
+              {"info":"directory","title":"Item1","badge":"Nov  4 23:52"},
+              {"info":"directory","title":"Item2","badge":"Nov  4 23:52"},
+              {"info":"directory","title":"Item3","badge":"Nov  4 23:52"},
+              {"info":"directory","title":"Item4","badge":"Nov  4 23:52"},
+              {"info":"directory","title":"Item5","badge":"Nov  4 23:52"}
+          ]}
+        ]},
+          {"info":"directory","title":"CategoryE","badge":"Nov  4 23:52","childs":[
+            {"info":"directory","title":"PropertiesX","badge":"Nov  4 23:52","childs":[
+              {"info":"directory","title":"Item1","badge":"Nov  4 23:52"},
+              {"info":"directory","title":"Item2","badge":"Nov  4 23:52"},
+              {"info":"directory","title":"Item3","badge":"Nov  4 23:52"},
+              {"info":"directory","title":"Item4","badge":"Nov  4 23:52"},
+              {"info":"directory","title":"Item5","badge":"Nov  4 23:52"}
+          ]},
+            {"info":"directory","title":"PropertiesY","badge":"Nov  4 23:52","childs":[
+              {"info":"directory","title":"Item1","badge":"Nov  4 23:52"},
+              {"info":"directory","title":"Item2","badge":"Nov  4 23:52"},
+              {"info":"directory","title":"Item3","badge":"Nov  4 23:52"},
+              {"info":"directory","title":"Item4","badge":"Nov  4 23:52"},
+              {"info":"directory","title":"Item5","badge":"Nov  4 23:52"}
+          ]}
+        ]}
+      ]},
+        {"info":"directory","title":"SubGroupB","badge":"Nov  4 23:52","childs":[
+          {"info":"directory","title":"CategoryD","badge":"Nov  4 23:52","childs":[
+            {"info":"directory","title":"PropertiesX","badge":"Nov  4 23:52","childs":[
+              {"info":"directory","title":"Item1","badge":"Nov  4 23:52"},
+              {"info":"directory","title":"Item2","badge":"Nov  4 23:52"},
+              {"info":"directory","title":"Item3","badge":"Nov  4 23:52"},
+              {"info":"directory","title":"Item4","badge":"Nov  4 23:52"},
+              {"info":"directory","title":"Item5","badge":"Nov  4 23:52"}
+          ]},
+            {"info":"directory","title":"PropertiesY","badge":"Nov  4 23:52","childs":[
+              {"info":"directory","title":"Item1","badge":"Nov  4 23:52"},
+              {"info":"directory","title":"Item2","badge":"Nov  4 23:52"},
+              {"info":"directory","title":"Item3","badge":"Nov  4 23:52"},
+              {"info":"directory","title":"Item4","badge":"Nov  4 23:52"},
+              {"info":"directory","title":"Item5","badge":"Nov  4 23:52"}
+          ]}
+        ]},
+          {"info":"directory","title":"CategoryE","badge":"Nov  4 23:52","childs":[
+            {"info":"directory","title":"PropertiesX","badge":"Nov  4 23:52","childs":[
+              {"info":"directory","title":"Item1","badge":"Nov  4 23:52"},
+              {"info":"directory","title":"Item2","badge":"Nov  4 23:52"},
+              {"info":"directory","title":"Item3","badge":"Nov  4 23:52"},
+              {"info":"directory","title":"Item4","badge":"Nov  4 23:52"},
+              {"info":"directory","title":"Item5","badge":"Nov  4 23:52"}
+          ]},
+            {"info":"directory","title":"PropertiesY","badge":"Nov  4 23:52","childs":[
+              {"info":"directory","title":"Item1","badge":"Nov  4 23:52"},
+              {"info":"directory","title":"Item2","badge":"Nov  4 23:52"},
+              {"info":"directory","title":"Item3","badge":"Nov  4 23:52"},
+              {"info":"directory","title":"Item4","badge":"Nov  4 23:52"},
+              {"info":"directory","title":"Item5","badge":"Nov  4 23:52"}
+          ]}
+        ]}
+      ]}
+    ]},
+      {"info":"file","title":"tree.json","badge":"Nov  4 23:52"}
+    ]}
+  
+  ]
+  

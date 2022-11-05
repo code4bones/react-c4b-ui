@@ -1,5 +1,5 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
-import React, {  useEffect, useMemo, useState, useImperativeHandle } from "react";
+import React, {  useEffect, useMemo, useState, useImperativeHandle, useCallback, createRef } from "react";
 import clsx from "clsx";
 import { TreeMenuItem,TreeMenuProps,ItemProps,ItemRenderProps,TreeMenuItemType } from "./TreeMenu.types";
 import  "./TreeMenu.less";
@@ -65,6 +65,55 @@ const ItemText : React.FC<ItemRenderProps> = (props) => {
 	);
 };
 
+type ResizableProps = {
+	children:string | JSX.Element;
+	treeID:string;
+}
+
+const Control : React.FC<ResizableProps> = ({ children,treeID }) => {
+	const lastX = React.useRef<number>(0);
+	const lastW = React.useRef<number>(0);
+	const tree = React.useRef(document.getElementById(treeID));
+
+	const onMouseDown = (ev) => {
+		const val = document.getElementsByClassName("value");
+		if  (!val.length )
+			return; 
+		const rc = val[0].getBoundingClientRect();
+		lastX.current = ev.pageX;
+		lastW.current = rc.left - 16;
+		window.addEventListener("mousemove",onMove);
+		window.addEventListener("mouseup",onStop);
+		onMove(ev);
+		ev.preventDefault();
+	};
+	const onMove = (ev) => {
+		const delta = ev.pageX - lastX.current; 
+		const newX = lastW.current + delta;
+		const dir = (newX - lastW.current) >= 0;
+		if ( (!dir && newX > 100) || (dir && newX < tree.current.clientWidth - 40) ) {
+			const tree = document.getElementById(treeID); 
+			tree.style.setProperty("--resizeX",`${newX}px`);				
+			lastW.current = newX;
+			lastX.current = ev.pageX;
+		}
+		ev.preventDefault();
+	};
+
+	const onStop = (ev) => {
+		window.removeEventListener("mouseup",onStop);
+		window.removeEventListener("mousemove",onMove);
+		ev.preventDefault();
+	};
+
+	return (
+		<div className="value" style={{ display:"flex",flexDirection:"row" }}>
+			<div className="sizer"  onMouseDown={onMouseDown} />
+			<div className="control">{children}</div>
+		</div>
+	);
+};
+
 const Item : React.FC<ItemRenderProps> = (props) => {
 	const { 
 		icon,
@@ -72,18 +121,26 @@ const Item : React.FC<ItemRenderProps> = (props) => {
 		disabled, 
 		onClick,level = 0,
 		style,
+		control,
+		propertyGrid,
+		treeID,
+		badgeVisible,
+		groupIconLeft,
 		classes = [] 
 	} = props;
+
 	const padding = icon && hasChilds ? 0 : 0;
 	return (
 		<div style={{ paddingLeft:`${(level*12)+padding}px`,...style }} 
 			className={clsx("item",{ hasChilds,disabled },Array.from(classes))} onClick={() => onClick && onClick(props)}>
-			<div className="content">                
+			<div className={clsx("content",{ hasChilds })} >
+				{groupIconLeft && <GroupState {...props} />}
 				<ItemIcon {...props} />
 				<ItemText {...props} />
-				<ItemBadge {...props} />
-				<GroupState {...props} />
+				{badgeVisible && <ItemBadge {...props} />}
 			</div>
+			{(propertyGrid || control) && !hasChilds && <Control treeID={treeID}>{control}</Control>}
+			{groupIconLeft || <GroupState {...props} />}
 		</div>
 	);
 }; 
@@ -93,6 +150,8 @@ export type TreeMenuActions = {
     getItem:(id:string) => TreeMenuItem | null;
     collapse:(id:string,collapsed?:boolean) => void;
     select:(id:string) => void;
+	invalidate:() => void;
+	rebuild:(items:TreeMenuItem[]) => void;
 }
 
 const TreeMenu = React.forwardRef<TreeMenuActions,TreeMenuProps>((props,ref) => {
@@ -104,10 +163,17 @@ const TreeMenu = React.forwardRef<TreeMenuActions,TreeMenuProps>((props,ref) => 
 		renderIcon,
 		onClick,
 		onToggle,
+		infoReveal = "always",
 		initialCollapsed,
 		initialSelected,
+		titleStyle,
+		infoStyle,
 		classPrefix,
 		enableRotate,
+		propertyGrid,
+		groupIconLeft,
+		badgeVisible = true,
+		treeID,
 		theme
 	} = props;
 	const [data,setData] = useState<TreeMenuItemType[]>([]);
@@ -181,15 +247,22 @@ const TreeMenu = React.forwardRef<TreeMenuActions,TreeMenuProps>((props,ref) => 
 		enable:enableItem,
 		getItem,
 		collapse,
-		select:selectItem
+		select:selectItem,
+		invalidate:() => setChanged(!changed),
+		rebuild:(newItems) => setData(transform(Array.from(newItems)))
 	}));
 
 	const transform = (list:TreeMenuItemType[],level = 0,parent?:TreeMenuItemType) : TreeMenuItemType[] => {
-		return list.map((item)=>{
+		return list.map((item,index)=>{
 			if ( parent )
 				item.parent = parent;
 			const { childs } = item;
 			item.level = level;
+			if ( !item.id )
+				item.id = `id_${level}_${index}`;
+			if ( item.info ) {				
+				item.infoReveal = item.infoReveal || infoReveal || "always";
+			}
 			if ( childs ) {
 				item.hasChilds = true;
 				item.classes = new Set(["expanded"]);
@@ -249,13 +322,21 @@ const TreeMenu = React.forwardRef<TreeMenuActions,TreeMenuProps>((props,ref) => 
 		};
 		const view = list.map((item,index)=>{
 			const { childs } = item;
-			const commonProps = {
+			const commonProps : ItemRenderProps = {
+				titleStyle,
+				infoStyle,
+				// override item's styles
 				...item, 
+				// add common props
 				onClick:() => _onClick(item), 
 				renderBadge,
 				enableRotate,
 				renderGroupState,
 				renderIcon,
+				badgeVisible,
+				groupIconLeft,
+				treeID,
+				propertyGrid,
 			};
 			if ( childs ) {
 				return (
@@ -278,6 +359,8 @@ const TreeMenu = React.forwardRef<TreeMenuActions,TreeMenuProps>((props,ref) => 
 
 	const setRef = (ref:HTMLDivElement) => {
 		// handle first render, to process initial states
+		if (!ref)
+			return;
 		if (!once && ref?.clientHeight > 0 ) {
 			setOnce(true); // only once ( need to handle "resize" to reset ???? )
 			iteratateItems(data,(item)=>{
@@ -294,7 +377,7 @@ const TreeMenu = React.forwardRef<TreeMenuActions,TreeMenuProps>((props,ref) => 
 	};
 
 	return (
-		<div className={clsx(classPrefix,theme,"tree-menu")} ref={setRef}>
+		<div className={clsx(classPrefix,theme,"tree-menu")} id={treeID} ref={setRef}>
 			{menu}
 		</div>
 	);

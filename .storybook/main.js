@@ -1,34 +1,15 @@
 const path = require("path");
+
 module.exports = {
   stories: ["../src/**/*.stories.tsx"],
   // Add any Storybook addons you want here: https://storybook.js.org/addons/
-  addons: ['storybook-dark-mode'],
+  addons: ['@storybook/addon-controls','@storybook/addon-essentials','storybook-dark-mode'],
   webpackFinal: async config => {
-    /*
-    config.module.rules.push({
-      test: /\.scss$/,
-      use: ["style-loader", "css-loader", "sass-loader"],
-      include: path.resolve(__dirname, "../")
-    });
-    */
     config.module.rules.push({
       test: /\.(less)$/,
       use: ["style-loader", "css-loader", "less-loader"],
       include: path.resolve(__dirname, "../")
     });
-
-    /*
-    config.module.rules.push({
-    test: /\.(less)$/,
-    use: [{
-    	loader: "style-loader" // creates style nodes from JS strings
-    }, {
-    	loader: "css-loader" // translates CSS into CommonJS
-    }, {
-    	loader: "less-loader" // compiles Less to CSS
-    }]
-    });
-    */
     config.module.rules.push({
       test: /\.(ts|tsx)$/,
       loader: require.resolve("babel-loader"),

@@ -3,8 +3,55 @@
 @import "../typography.less";
 
 
+
 .tree-menu {
 
+    --resizeX:65%;
+    overflow-x: hidden;
+
+    .value {
+        position: relative;
+        background-color: var(--tree-background);
+        position: absolute;
+        display: flex;
+        flex-grow: 1;
+        align-self: center;
+        left: var(--resizeX);
+        height: var(--item-height);
+        width: calc(99% - var(--resizeX));
+        z-index: 2;
+        >.sizer {
+            --padding:calc(var(--item-padding) * -1);
+            position: absolute;
+            top:var(--padding);
+            bottom:calc(var(--padding) + 1px);
+            min-height: 100%;
+            min-width:10px;
+            cursor:e-resize;
+            z-index: 3;            
+            border-left: 1px dotted var(--item-sizer-color);
+            opacity: .4;
+            margin-left:-5px;
+            &:hover {
+                border-left: 1px dotted var(--item-sizer-color);
+                opacity: 1;
+            }
+    
+        }
+
+
+        .control {
+            display: flex;
+            justify-content: flex-start;
+            padding-left: 0px;
+            align-items: center;
+            flex-grow: 1;
+            overflow-x: hidden;
+            overflow-y: hidden;
+        }
+    }
+    
+    
   background-color: var(--tree-background);
 
   font-family: var(--font-family);
@@ -17,7 +64,10 @@
           user-select: none; /* Non-prefixed version, currently */
 
   .group {
+    position: relative;
       transition: all .3s cubic-bezier(0.81, 0.58, 0.48, 1.41);
+      // width: var(--resizeX);
+
   }
 
   .folder {
@@ -25,12 +75,17 @@
       margin-right: 5px;
   }
 
+
   /*
   .wrapper {
   }
   */
 
-  .item {
+
+    .item {
+
+      display: flex;
+      flex-direction: row;
       cursor: pointer;
       transition: all .3s ease-in;
 
@@ -92,21 +147,21 @@
 
       }
 
-      > .content {
-          padding: var(--item-padding);//10px;
-          min-height: var(--item-height);
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          overflow: hidden;
-          
-          > .text .title, .text .info {
-            // display: flex;
-            // align-items: center;
-            overflow: hidden;
+
+        > .content {
+            padding: var(--item-padding);//10px;
+            min-height: var(--item-height);
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            overflow:hidden;
+            flex-grow: 1;
             
-            transition: all .4s ease-in-out;
-          }
+          
+            > .text .title, .text .info {
+                overflow: hidden;
+                transition: all .4s ease-in-out;
+            }
 
           &:hover:has(.info) {
             color:var(--item-hover-color);
@@ -143,6 +198,7 @@
             flex-direction: column;
             align-content: center;
             overflow-x: clip;
+            max-height: var(--item-height);
 
             
             > .title:has(~.info.vertical,~.info.horizontal) {
@@ -161,8 +217,6 @@
               color: var(--item-info);
               overflow: hidden;
               display: flex;
-              flex-grow: 1;
-
             }
 
             > .info.vertical {
@@ -175,31 +229,18 @@
 
           }
 
-          /*
-          > .folder {
-
-          }
-          */
-
           > .icon {
             display: flex;
             padding-right: 5px;                
-        }
+        }    
 
-
-
-
-          /*
-          > .marker {
-
-          }
-          */
-      }
+    }
   }
 
   .selected {
       background-color:var(--item-selected-background);
       color:var(--item-selected-color) !important;
+      z-index: 9999;
   }
 
 }

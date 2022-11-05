@@ -1,9 +1,16 @@
 // Generated with util/create-component.js
 import React,{ useEffect,createRef } from "react";
 import TreeMenu,{ TreeMenuItem,TreeMenuActions } from "./TreeMenu";
+import { ComponentStory, ComponentMeta } from "@storybook/react";
+import _ from "lodash";
+
 import { FaSignInAlt,FaSign,FaSignOutAlt, FaCog,FaCogs, FaInfo,FaTable, FaFolderOpen,FaFolder, FaChevronRight, FaStar, FaArchive } from "react-icons/fa";
 // import * as DarkModeToggle from "https://googlechromelabs.github.io/dark-mode-toggle/src/dark-mode-toggle.mjs";
 
+import tree from "./tree.json";
+import pgtree from "./pgtree.json";
+
+import { TreeMenuProps } from "./TreeMenu.types";
 
 type MarkerProps = {
 	color:string
@@ -44,6 +51,7 @@ const ITEMS : TreeMenuItem[] = [
 		unselectable:false,
 		infoReveal:"horizontal",
 		icon:<FaStar color="white" />,
+		control:"Heading value",
 		titleStyle:{
 			color:"orange",
 			fontWeight:"bolder"
@@ -53,6 +61,7 @@ const ITEMS : TreeMenuItem[] = [
 	{ 		
 		id:"main",
 		title:"TreeMenu",
+		badge:"Info",
 		info:"Vertical reveal infos",
 		titleStyle:{
 			color:"green",
@@ -70,6 +79,7 @@ const ITEMS : TreeMenuItem[] = [
 				id:"home",
 				title:"Regular Title with",
 				info:"Custom infoStyle",
+				// control:<input defaultValue="Input..." />,
 				infoStyle:{
 					fontSize:12,
 				},
@@ -143,13 +153,132 @@ const ITEMS : TreeMenuItem[] = [
 ];
 
 
-export default {
-	title: "TreeMenu"
+const Tree = ({ treeID,items,...rest }:Partial<TreeMenuProps>)  => {
+	const ref = createRef<TreeMenuActions>();
+
+	const onClick = (id:string) => {
+		const item = ref.current?.getItem(id);
+	};
+
+	const onToggle = (...args:any) => {
+		console.log(...args);
+	};
+
+	const renderIcon = (item:TreeMenuItem) => {
+		if ( !item.childs?.length )
+			return <FaArchive />; 
+	};
+
+
+	const renderGroupState = (item:TreeMenuItem) => {
+		if ( rest.enableRotate )
+			return <FaChevronRight />;
+		return item.collapsed ? <FaFolder /> : <FaFolderOpen/>;
+	};
+
+	useEffect(()=>{
+		console.log(rest);
+		ref?.current?.rebuild(_.cloneDeep(items as TreeMenuItem[]));
+	},[rest]);
+
+	return (
+		<div style={{ display:"flex",flexDirection:"row" }}>
+			<div style={{ minWidth:400 }}>
+				<TreeMenu 
+					ref={ref}
+					treeID={treeID || ""}
+					{...rest}
+					items={_.cloneDeep(items as TreeMenuItem[])}
+					renderIcon={renderIcon}
+					renderGroupState={renderGroupState}
+					onClick={onClick} 
+					onToggle={onToggle}
+				/>
+			</div>
+		</div>
+	);
 };
 
+export default {
+	title: "Demo",
+	component:Tree,
+	argTypes:{
+		theme:{
+			control:{ type:"select",options:["dark","light"] }
+		},
+		groupIconLeft:{ control:"boolean" },
+		infoReveal:{
+			control:{ type:"select",options:["always","horizontal","vertical"] }
+		},
+		enableRotate:{ control:"boolean" },
+		badgeVisible:{ control:"boolean" },
+		infoStyle:{
+			control:{
+				type:"object"
+			},
+			defaultValue:{ color:"red" }
+		},
+		titleStyle:{
+			control:{
+				type:"object"
+			},
+			defaultValue:{ fontSize:12 }
+		},
+		items:{
+			table:{
+				disable:true
+			}
+		},
+		propertyGrid:{
+			table:{
+				disable:true,
+			}
+		}
+	}
+} as ComponentMeta<typeof Tree>;
 
 
+const Template : ComponentStory<typeof Tree> = (args:Partial<TreeMenuProps>) => <Tree {...args} />; 
 
+export const FolderTree = Template.bind({});
+
+FolderTree.args = {
+	treeID:"simple_tree",
+	groupIconLeft:true,
+	infoReveal:"vertical",
+	enableRotate:false,
+	items:tree,
+	badgeVisible:true,
+	propertyGrid:false,
+	theme:"dark",
+};
+
+export const PropertyGrid = Template.bind({});
+
+PropertyGrid.args = {
+	treeID:"property_grid",
+	groupIconLeft:true,
+	infoReveal:"always",
+	enableRotate:false,
+	badgeVisible:true,
+	propertyGrid:true,
+	items:pgtree,
+	theme:"dark",
+};
+
+/*
+export const FolderTree = Template.bind({});
+
+FolderTree.args = {
+	id:"simple_tree_2",
+	treeID:"tree_2",
+	initialCollapsed:false,
+	groupIconLeft:false,
+};
+*/
+// FolderTree.args.defaultCollapsed = false;
+
+/*
 export const FullSample = ()  => {
 	const ref = createRef<TreeMenuActions>();
 	const renderMarker = ({ id,...rest }) => {
@@ -182,13 +311,15 @@ export const FullSample = ()  => {
 		<div style={{ display:"flex",flexDirection:"row" }}>
 			<div style={{ minWidth:400 }}>
 				<TreeMenu 
+					treeID="tree1"
+					// propertyGrid
 					classPrefix="test"
-					// initialCollapsed
+					initialCollapsed
 					// theme="dark"
 					enableRotate={true}
-					initialSelected="LAST"
+					// initialSelected="LAST"
 					// ref={ref}
-					items={ITEMS}
+					items={tree as TreeMenuItem[]}
 					renderGroupState={<FaChevronRight />}
 					// renderIcon={renderIcon}
 					// renderGroupState={renderGroupState}
@@ -197,6 +328,11 @@ export const FullSample = ()  => {
 					onToggle={onToggle}
 				/>
 			</div>
+		</div>
+	);
+};
+*/
+/*
 			<div style={{ minWidth:400 }}>
 				<TreeMenu 
 					classPrefix="test"
@@ -213,11 +349,8 @@ export const FullSample = ()  => {
 					onClick={onClick} 
 					onToggle={onToggle}
 				/>
-			</div>
-		</div>
-	);
-};
 
+*/
 // export const WithBaz = WithBar;
 
 // export const WithBaz = () => <TreeMenu foo="baz" />;

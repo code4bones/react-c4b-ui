@@ -1,0 +1,31 @@
+[
+    {"info":"directory","title":"Root","badge":"Root's","control":"Nov  4 23:52","childs":[
+      {"info":"directory","title":"Item1","control":"Nov  4 23:52"},
+      {"info":"directory","title":"Item2","control":"Nov  4 23:52"},
+      {"info":"directory","title":"Item3","control":"Nov  4 23:52"},
+      {"info":"directory","title":"Item4","control":"Nov  4 23:52"},
+      {"info":"directory","title":"Item5","control":"Nov  4 23:52"},
+      {"info":"directory","title":"Group1","badge":"View","control":"Nov  4 23:52","childs":[
+        {"info":"directory","title":"SubGroupA","control":"Nov  4 23:52","childs":[
+          {"info":"directory","title":"CategoryD","control":"Nov  4 23:52","childs":[
+            {"info":"directory","title":"PropertiesX","control":"Nov  4 23:52","childs":[
+              {"info":"directory","title":"Item1","control":"Nov  4 23:52"},
+              {"info":"directory","title":"Item2","control":"Nov  4 23:52"},
+              {"info":"directory","title":"Item3","control":"Nov  4 23:52"},
+              {"info":"directory","title":"Item4","control":"Nov  4 23:52"},
+              {"info":"directory","title":"Item5","control":"Nov  4 23:52"}
+          ]},
+            {"info":"directory","title":"PropertiesY","control":"Nov  4 23:52","childs":[
+              {"info":"directory","title":"Item1","control":"Nov  4 23:52"},
+              {"info":"directory","title":"Item2","control":"Nov  4 23:52"},
+              {"info":"directory","title":"Item3","control":"Nov  4 23:52"},
+              {"info":"directory","title":"Item4","control":"Nov  4 23:52"},
+              {"info":"directory","title":"Item5","control":"Nov  4 23:52"}
+          ]}
+        ]}          
+      ]}      
+    ]},
+      {"info":"file","title":"tree.json","control":"Nov  4 23:52"}
+    ]}  
+  ]
+  
