@@ -161,7 +161,7 @@ const Tree = ({ treeID,items,...rest }:Partial<TreeMenuProps>)  => {
 	};
 
 	const onToggle = (...args:any) => {
-		console.log(...args);
+		// console.log(...args);
 	};
 
 	const renderIcon = (item:TreeMenuItem) => {
@@ -179,6 +179,7 @@ const Tree = ({ treeID,items,...rest }:Partial<TreeMenuProps>)  => {
 	useEffect(()=>{
 		console.log(rest);
 		ref?.current?.rebuild(_.cloneDeep(items as TreeMenuItem[]));
+		// ref?.current?.invalidate();
 	},[rest]);
 
 	return (
@@ -223,6 +224,12 @@ export default {
 				type:"object"
 			},
 			defaultValue:{ fontSize:12 }
+		},
+		itemHeight:{
+			control:{
+				type:"number"
+			},
+			defaultValue:32
 		},
 		items:{
 			table:{

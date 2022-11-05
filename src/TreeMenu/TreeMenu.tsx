@@ -174,6 +174,7 @@ const TreeMenu = React.forwardRef<TreeMenuActions,TreeMenuProps>((props,ref) => 
 		groupIconLeft,
 		badgeVisible = true,
 		treeID,
+		itemHeight,
 		theme
 	} = props;
 	const [data,setData] = useState<TreeMenuItemType[]>([]);
@@ -249,7 +250,7 @@ const TreeMenu = React.forwardRef<TreeMenuActions,TreeMenuProps>((props,ref) => 
 		collapse,
 		select:selectItem,
 		invalidate:() => setChanged(!changed),
-		rebuild:(newItems) => setData(transform(Array.from(newItems)))
+		rebuild:(newItems) => {setOnce(false);setData(transform(Array.from(newItems)));}
 	}));
 
 	const transform = (list:TreeMenuItemType[],level = 0,parent?:TreeMenuItemType) : TreeMenuItemType[] => {
@@ -361,6 +362,9 @@ const TreeMenu = React.forwardRef<TreeMenuActions,TreeMenuProps>((props,ref) => 
 		// handle first render, to process initial states
 		if (!ref)
 			return;
+		if (itemHeight)
+			ref.style.setProperty("--item-height",`${itemHeight}px`);
+
 		if (!once && ref?.clientHeight > 0 ) {
 			setOnce(true); // only once ( need to handle "resize" to reset ???? )
 			iteratateItems(data,(item)=>{

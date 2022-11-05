@@ -4,7 +4,7 @@
         {"info":"directory","title":"SubGroupA","badge":"Nov  4 23:52","childs":[
           {"info":"directory","title":"CategoryD","badge":"Nov  4 23:52","childs":[
             {"info":"directory","title":"PropertiesX","badge":"Nov  4 23:52","childs":[
-              {"info":"directory","title":"PropItem","control":"Nov  4 23:52"},
+              {"info":"directory","title":"PropItem","control":"JSX / string"},
               {"info":"directory","title":"Item2","badge":"Nov  4 23:52"},
               {"info":"directory","title":"Item3","badge":"Nov  4 23:52"},
               {"info":"directory","title":"Item4","badge":"Nov  4 23:52"},

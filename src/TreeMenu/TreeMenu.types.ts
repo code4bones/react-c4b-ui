@@ -76,6 +76,7 @@ type CommonItemProps = Pick<ItemRenderProps,
 export type TreeMenuProps = {
     items:TreeMenuItem[];
     theme?:Theme | string;
+    itemHeight?:number;
     // scope custom styling
     classPrefix?:string;
     initialCollapsed?:boolean;
