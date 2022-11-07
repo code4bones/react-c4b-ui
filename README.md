@@ -1,3 +1,8 @@
+
+### DEPRECATED
+
+moved to [React Tree Menu / Property Grid](https://github.com/code4bones/react-tree-menu-property-grid)
+
 ### React Component Library - code4bones react UI
 
 ### Components
